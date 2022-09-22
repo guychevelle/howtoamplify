@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRef, useState, useEffect } from 'react';
-import { Storage, Auth } from 'aws-amplify';
+import { Authenticator } from '@aws-amplify/ui-react';
+import { Storage, Hub, Auth } from 'aws-amplify';
 import { GalleryEditProfile } from './ui-components';
 
 export default (props) => {
@@ -25,11 +26,12 @@ export default (props) => {
   const [profilename, updateProfileName] = useState(
          props.userInfo ? props.userInfo.attributes.name :
          "");
+  const [newname, updateNewName] = useState("robert");
   const [profileemail, updateProfileEmail] = useState(
          props.userInfo ? props.userInfo.attributes.email :
          "");
 
-  const profileoverrides = {
+  const [profileoverrides, updateProfileOverrides] = useState({
     "GalleryEditProfile": {
       margin: 'auto'
     },
@@ -52,18 +54,18 @@ export default (props) => {
       placeholder: profilename
     },
     "TextFieldEmail": {
-      onChange: (event) => {emailChanged(event.target.value)},
       placeholder: profileemail
     }
-  };
+  });
 
   //  useEffect (with dependency on uploadcount) will re-render
   //  the page whenever we change the count. i.e. after an upload
   //  event we want to change the pic in the profile.
+/*
   useEffect(() => {
     console.log('useeffect profilename', profilename);
   }, [uploadcount]);
-
+*/
   const handleFileChange = event => {
     const fileObj = event.target.files && event.target.files[0];
     console.log('file is ', fileObj.name);
@@ -71,35 +73,25 @@ export default (props) => {
   }
 
   async function saveProfile(e) {
+    updateNewName('franky');
     console.log('save clicked');
     console.log('props.userInfo', props.userInfo);
     console.log('profilename', profilename);
-    console.log('profileemail', profileemail);
-    if (profilename != props.userInfo.attributes.name) {
-      await Auth.updateUserAttributes(props.userInfo,
-        {
-          'name': profilename
-        });
-      props.userCheck();
-    }
-    if (profileemail != props.userInfo.attributes.email) {
-      await Auth.updateUserAttributes(props.userInfo,
-        {
-          'email': 'ocdmoynihan@gmail.com'
-        });
-      props.userCheck();
-    }
+    console.log('newname', newname);
+    /*
+    await Auth.updateUserAttributes(props.userInfo,
+      {
+        'email': 'ocdmoynihan@gmail.com'
+      });
+    */
   }
   
   function nameChanged(value) {
     console.log('value', value);
     updateProfileName(value);
+    updateNewName('Frank');
     console.log('profilename', profilename);
-  }
-
-  function emailChanged(value) {
-    console.log('email', value);
-    updateProfileEmail(value);
+    console.log('newname', newname);
   }
 
   async function getImage() {

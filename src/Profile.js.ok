@@ -1,0 +1,40 @@
+import React from 'react';
+import { useRef, useState, useEffect } from 'react';
+import { Storage, Auth } from 'aws-amplify';
+import { GalleryEditProfile } from './ui-components';
+
+export default (props) => {
+  //  props input needs to include a 'CognitoUser' reference. This
+  //  is returned by Auth.currentAuthenticatedUser() call. The userInfo
+  //  property passed into Profile through 'props' is a CognitoUser.
+  console.log('props', props);
+
+  const [count, updateCount] = useState(0);
+  const [newname, updateNewName] = useState("robert");
+
+  const profileoverrides = {
+    "Button": {
+      onClick: saveProfile
+    }
+  };
+
+  async function saveProfile(e) {
+    updateNewName('franky'+count);
+    updateCount(count+1);
+    console.log('save clicked');
+    console.log('newname', newname);
+    console.log('count', count);
+  }
+  
+
+  return (
+    <div>
+      <p />
+      <h2>User Profile for {newname}</h2>
+      <p />
+      <div className="profilediv">
+        <GalleryEditProfile overrides={profileoverrides} />
+      </div>
+    </div>
+  );
+};

@@ -115,7 +115,9 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
-          <Route path="/profile" element={<Profile userInfo={user}/>} />
+          <Route path="/profile" element={<Profile 
+                                           userInfo={user}
+                                           userCheck={checkUser}/>} />
         </Routes>
       </BrowserRouter>
     </div>

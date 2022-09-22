@@ -119,6 +119,8 @@ export default (props) => {
   //  we need to see if the key already exists, if so, a Storage.remove()
   //  must be called first
   async function saveToS3(file) {
+    if (props.userInfo.attributes.picture)
+      await Storage.remove(props.userInfo.attributes.picture);
     const result = await Storage.put('profile/' + props.userInfo.username, 
                                      file, 
                                      { contentType: 'image/png',
@@ -126,9 +128,10 @@ export default (props) => {
                                      });
     if (result) {
       console.log('storage result', result);
-      // need to figure out how to wait for save button
       console.log('storage put result', result);
       await Auth.updateUserAttributes(props.userInfo, {"picture":result.key});
+      props.userCheck();
+      updateProfilePic(null);
     }
   }
 

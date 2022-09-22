@@ -7,7 +7,8 @@
     "permissions": {
       "auth": [ 
                "CREATE_AND_UPDATE",
-               "READ"
+               "READ",
+               "DELETE"
               ],
       "guest": ["READ"]
     }

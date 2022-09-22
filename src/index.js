@@ -18,7 +18,7 @@ const theme = {
   tokens: {
     colors: {
       background: {
-        primary: { value: 'blue' }
+        primary: { value: 'white' }
       }
     },
     components: {
@@ -39,7 +39,8 @@ const theme = {
           color: { value: '{colors.blue.90}' },
           _active: { color: { value: '{colors.blue.90}' }},
           _focus: { color: { value: '{colors.blue.40}' }},
-          _hover: { color: { value: '{colors.blue.60}' }}
+          _hover: { color: { value: '{colors.blue.60}' }},
+          _visited: { color: { value: '{colors.blue.90}' }}
         } 
       }
     }

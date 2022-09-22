@@ -1,0 +1,46 @@
+
+
+body {
+  background-color: #373e98;
+  color: white;
+}
+
+footer {
+  font-style: normal;
+  font-size: 12px;
+}
+
+.centered {
+  text-align: center;
+}
+
+.link-image {
+  cursor: pointer !important;
+}
+
+/* display profile view/edit card in center
+.profilediv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* react-burger-menu specific styles */
+* {
+  box-sizing: border-box;
+}
+
+#page-wrap {
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.burger-margins {
+  margin-right: 80px;
+  margin-bottom: 0px;
+}
+
+/* end of react-burger-menu styles */
+
+

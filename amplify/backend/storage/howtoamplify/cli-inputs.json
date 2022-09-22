@@ -1,0 +1,13 @@
+{
+  "resourceName": "howtoamplify",
+  "bucketName": "howtoamplify-bucket",
+  "policyUUID": "70f8e6ed",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ]
+}

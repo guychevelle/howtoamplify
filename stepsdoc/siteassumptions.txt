@@ -1,0 +1,6 @@
+
+Assumptions:
+- Reader has some knowledge of Javascript
+- Reader has a GitHub account
+- Reader has an existing Amazon account
+- All examples will be from perspective of development on Mac OS

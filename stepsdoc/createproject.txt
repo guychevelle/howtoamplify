@@ -1,0 +1,97 @@
+
+Process:
+name: Create React project and GitHub repository
+description: An auto-generated React project will be the basis for all examples
+picturekey:
+
+Steps:
+
+stepnum: 1
+name: Install Node.js and NPM
+description: You will run your site on your local machine using Node.js. All tools will be installed using NPM (Node Package Manager).
+steptextkey:
+Reader will need to navigate to a site to download and install Node/NPM media
+link to macOS install is at https://kinsta.com/blog/how-to-install-node-js/#how-to-install-nodejs-on-macos
+
+use command 'node --version' to verify installed Node.js version
+
+$ node --version
+v16.14.2
+$ npm --version
+8.6.0
+
+stepnum: 2
+name: Create a React project
+description: Use the create-react-app command to create your first project.
+steptextkey:
+It is advised to create a local directory under which all other local projects can be managed.  Since examples will be AWS Amplify specific, create an 'amplify' directory under your user home directory.
+
+$ mkdir amplify
+$ cd amplify
+$ pwd
+/Users/<my home dir>/amplify
+
+Now create your first React project using the below command:
+
+$ npx create-react-app testapp
+
+The result of the command will be to create a 'testapp' subdirectory with initial Node files.  To confirm the project was craeted successfully, change your directory to the project directory and start the local site.
+
+$ cd testapp
+$ npm start
+
+A simple React page is rendered in your browser. You can stop site execution by entering Ctrl-C in the terminal session to stop npm execution.
+<Need to show a picture of the react app in the browser>
+
+stepnum: 3
+name: Create a GitHub repository
+description: Not only is it best practice to save code in a version repository like GitHub, the repository will also be needed by AWS to host your site in the cloud.
+steptextkey:
+Login to your GitHub account and select the '+' in the top right menu bar and select the 'New repository' option from the dropdown menu.
+<show drop down>
+
+stepnum: 4
+name: Create the new repository
+description: You can select to create either a Public or Private repository.
+steptextkey:
+After entering the new repository name, click on the 'Create repository' button.
+
+stepnum: 5
+name: Push your initial code to GitHub
+description: Create a main branch and push committed code to the remote GitHub repository.
+steptextkey:
+Execute the below commands to add your project to the remote GitHub repository in a branch called 'main'.
+
+$ git remote add origin <your new GitHub repository URL>
+$ git branch -M main
+$ git push -u origin main
+Enumerating objects: 22, done.
+Counting objects: 100% (22/22), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (22/22), done.
+Writing objects: 100% (22/22), 294.34 KiB | 7.36 MiB/s, done.
+Total 22 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/guychevelle/foo.git
+ * [new branch]      main -> main
+Branch 'main' set up to track remote branch 'main' from 'origin'.
+$ git commit -am 'initial default react code'
+$ git push origin main
+Enumerating objects: 18, done.
+Counting objects: 100% (18/18), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (13/13), done.
+Writing objects: 100% (16/16), 2.85 KiB | 973.00 KiB/s, done.
+Total 16 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/myaccount/myproject.git
+   0539d68..f605eec  main -> main
+
+
+
+stepnum: 6
+name: Verify GitHub repository branch content
+description: Navigate to your new repository in GitHub from your browser and confirm code is represented in the 'main' branch.
+
+<show picture from CI/CD google doc
+
+

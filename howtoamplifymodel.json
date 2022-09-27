@@ -2,7 +2,7 @@
   "version": 1,
   "serviceConfiguration": {
     "serviceName": "AppSync",
-    "apiName": "testdb",
+    "apiName": "howtodb",
     "transformSchema": "MODELTEXT",
     "defaultAuthType": {
       "mode": "AMAZON_COGNITO_USER_POOLS",

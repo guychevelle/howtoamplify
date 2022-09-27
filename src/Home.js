@@ -1,4 +1,5 @@
 import React from 'react';
+import { HowToProcessCollection } from './ui-components';
 
 export default () => {
   return (
@@ -6,9 +7,9 @@ export default () => {
       <p />
       <h2>Home Page</h2>
       <p />
-      <ul>
-        <li><a href="https://vacationrental.runondemandgallery.com">Vacation Rental</a></li>
-      </ul>
+      <div>
+        <HowToProcessCollection />
+      </div>
     </div>
   );
 };

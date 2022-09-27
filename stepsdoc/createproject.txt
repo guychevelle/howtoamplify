@@ -2,13 +2,14 @@
 Process:
 name: Create React project and GitHub repository
 description: An auto-generated React project will be the basis for all examples
-picturekey:
+pictureurl: https://howtoamplify-bucket155250-sbxa.s3.amazonaws.com/public/reactlogo.png
 
 Steps:
 
 stepnum: 1
-name: Install Node.js and NPM
+name: Install Node.js 
 description: You will run your site on your local machine using Node.js. All tools will be installed using NPM (Node Package Manager).
+picturekey: <nodelogo.png>
 steptextkey:
 Reader will need to navigate to a site to download and install Node/NPM media
 link to macOS install is at https://kinsta.com/blog/how-to-install-node-js/#how-to-install-nodejs-on-macos
@@ -23,6 +24,7 @@ $ npm --version
 stepnum: 2
 name: Create a React project
 description: Use the create-react-app command to create your first project.
+picturekey: <show ??>
 steptextkey:
 It is advised to create a local directory under which all other local projects can be managed.  Since examples will be AWS Amplify specific, create an 'amplify' directory under your user home directory.
 

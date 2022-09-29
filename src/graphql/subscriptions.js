@@ -2,8 +2,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateProcess = /* GraphQL */ `
-  subscription OnCreateProcess($owner: String) {
-    onCreateProcess(owner: $owner) {
+  subscription OnCreateProcess {
+    onCreateProcess {
       id
       name
       description
@@ -23,7 +23,6 @@ export const onCreateProcess = /* GraphQL */ `
           _lastChangedAt
           processStepsId
           stepsCodeId
-          owner
         }
         nextToken
         startedAt
@@ -33,13 +32,12 @@ export const onCreateProcess = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
 export const onUpdateProcess = /* GraphQL */ `
-  subscription OnUpdateProcess($owner: String) {
-    onUpdateProcess(owner: $owner) {
+  subscription OnUpdateProcess {
+    onUpdateProcess {
       id
       name
       description
@@ -59,7 +57,6 @@ export const onUpdateProcess = /* GraphQL */ `
           _lastChangedAt
           processStepsId
           stepsCodeId
-          owner
         }
         nextToken
         startedAt
@@ -69,13 +66,12 @@ export const onUpdateProcess = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
 export const onDeleteProcess = /* GraphQL */ `
-  subscription OnDeleteProcess($owner: String) {
-    onDeleteProcess(owner: $owner) {
+  subscription OnDeleteProcess {
+    onDeleteProcess {
       id
       name
       description
@@ -95,7 +91,6 @@ export const onDeleteProcess = /* GraphQL */ `
           _lastChangedAt
           processStepsId
           stepsCodeId
-          owner
         }
         nextToken
         startedAt
@@ -105,13 +100,12 @@ export const onDeleteProcess = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
 export const onCreateSteps = /* GraphQL */ `
-  subscription OnCreateSteps($owner: String) {
-    onCreateSteps(owner: $owner) {
+  subscription OnCreateSteps {
+    onCreateSteps {
       id
       stepnum
       name
@@ -135,13 +129,12 @@ export const onCreateSteps = /* GraphQL */ `
       _lastChangedAt
       processStepsId
       stepsCodeId
-      owner
     }
   }
 `;
 export const onUpdateSteps = /* GraphQL */ `
-  subscription OnUpdateSteps($owner: String) {
-    onUpdateSteps(owner: $owner) {
+  subscription OnUpdateSteps {
+    onUpdateSteps {
       id
       stepnum
       name
@@ -165,13 +158,12 @@ export const onUpdateSteps = /* GraphQL */ `
       _lastChangedAt
       processStepsId
       stepsCodeId
-      owner
     }
   }
 `;
 export const onDeleteSteps = /* GraphQL */ `
-  subscription OnDeleteSteps($owner: String) {
-    onDeleteSteps(owner: $owner) {
+  subscription OnDeleteSteps {
+    onDeleteSteps {
       id
       stepnum
       name
@@ -195,7 +187,6 @@ export const onDeleteSteps = /* GraphQL */ `
       _lastChangedAt
       processStepsId
       stepsCodeId
-      owner
     }
   }
 `;

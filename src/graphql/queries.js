@@ -23,7 +23,6 @@ export const getProcess = /* GraphQL */ `
           _lastChangedAt
           processStepsId
           stepsCodeId
-          owner
         }
         nextToken
         startedAt
@@ -33,7 +32,6 @@ export const getProcess = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
@@ -58,7 +56,6 @@ export const listProcesses = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        owner
       }
       nextToken
       startedAt
@@ -92,7 +89,6 @@ export const syncProcesses = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        owner
       }
       nextToken
       startedAt
@@ -125,7 +121,6 @@ export const getSteps = /* GraphQL */ `
       _lastChangedAt
       processStepsId
       stepsCodeId
-      owner
     }
   }
 `;
@@ -160,7 +155,6 @@ export const listSteps = /* GraphQL */ `
         _lastChangedAt
         processStepsId
         stepsCodeId
-        owner
       }
       nextToken
       startedAt
@@ -204,7 +198,6 @@ export const syncSteps = /* GraphQL */ `
         _lastChangedAt
         processStepsId
         stepsCodeId
-        owner
       }
       nextToken
       startedAt

@@ -26,7 +26,6 @@ export const createProcess = /* GraphQL */ `
           _lastChangedAt
           processStepsId
           stepsCodeId
-          owner
         }
         nextToken
         startedAt
@@ -36,7 +35,6 @@ export const createProcess = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
@@ -65,7 +63,6 @@ export const updateProcess = /* GraphQL */ `
           _lastChangedAt
           processStepsId
           stepsCodeId
-          owner
         }
         nextToken
         startedAt
@@ -75,7 +72,6 @@ export const updateProcess = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
@@ -104,7 +100,6 @@ export const deleteProcess = /* GraphQL */ `
           _lastChangedAt
           processStepsId
           stepsCodeId
-          owner
         }
         nextToken
         startedAt
@@ -114,7 +109,6 @@ export const deleteProcess = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
@@ -147,7 +141,6 @@ export const createSteps = /* GraphQL */ `
       _lastChangedAt
       processStepsId
       stepsCodeId
-      owner
     }
   }
 `;
@@ -180,7 +173,6 @@ export const updateSteps = /* GraphQL */ `
       _lastChangedAt
       processStepsId
       stepsCodeId
-      owner
     }
   }
 `;
@@ -213,7 +205,6 @@ export const deleteSteps = /* GraphQL */ `
       _lastChangedAt
       processStepsId
       stepsCodeId
-      owner
     }
   }
 `;

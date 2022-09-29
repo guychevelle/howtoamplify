@@ -74,10 +74,7 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
-                                "provider": "userPools",
-                                "ownerField": "owner",
-                                "allow": "owner",
-                                "identityClaim": "cognito:username",
+                                "allow": "private",
                                 "operations": [
                                     "create",
                                     "update",
@@ -86,10 +83,11 @@ export const schema = {
                                 ]
                             },
                             {
-                                "allow": "private",
+                                "allow": "public",
                                 "operations": [
                                     "read"
-                                ]
+                                ],
+                                "provider": "iam"
                             }
                         ]
                     }
@@ -198,10 +196,7 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
-                                "provider": "userPools",
-                                "ownerField": "owner",
-                                "allow": "owner",
-                                "identityClaim": "cognito:username",
+                                "allow": "private",
                                 "operations": [
                                     "create",
                                     "update",
@@ -210,10 +205,11 @@ export const schema = {
                                 ]
                             },
                             {
-                                "allow": "private",
+                                "allow": "public",
                                 "operations": [
                                     "read"
-                                ]
+                                ],
+                                "provider": "iam"
                             }
                         ]
                     }
@@ -278,10 +274,11 @@ export const schema = {
                                 ]
                             },
                             {
-                                "allow": "private",
+                                "allow": "public",
                                 "operations": [
                                     "read"
-                                ]
+                                ],
+                                "provider": "iam"
                             }
                         ]
                     }

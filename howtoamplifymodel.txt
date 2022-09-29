@@ -1,5 +1,6 @@
-type Process @model @auth(rules: [{allow: owner}, 
-                                  {allow: private, operations: [read]}]) {
+type Process @model @auth(rules: [{allow: private}, 
+                                  {allow: public, operations: [read],
+                                   provider: iam}]) {
   id: ID!
   name: String!
   description: String
@@ -7,8 +8,9 @@ type Process @model @auth(rules: [{allow: owner},
   steps: [Steps] @hasMany
 }
 
-type Steps @model @auth(rules: [{allow: owner}, 
-                                {allow: private, operations: [read]}]) {
+type Steps @model @auth(rules: [{allow: private}, 
+                                {allow: public, operations: [read],
+                                 provider: iam}]) {
   id: ID!
   stepnum: Int!
   name: String!
@@ -19,7 +21,8 @@ type Steps @model @auth(rules: [{allow: owner},
 }
 
 type Code @model @auth(rules: [{allow: owner}, 
-                               {allow: private, operations: [read]}]) {
+                               {allow: public, operations: [read],
+                                provider: iam}]) {
   id: ID!
   codetextkey: String
 }

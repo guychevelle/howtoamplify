@@ -31,8 +31,8 @@
     },
     "categories": {
       "auth": {
-        "howtoamplifyAuth": {},
-        "true": {}
+        "true": {},
+        "howtoamplifyAuth": {}
       }
     }
   }

@@ -21,6 +21,10 @@
         }
       ]
     },
-    "includeIdentityPool": true
+    "includeIdentityPool": true,
+    "identityPoolConfiguration": {
+      "identityPoolName": "RESOURCEidentitypool",
+      "unauthenticatedLogin": true
+    }
   }
 }

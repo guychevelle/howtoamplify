@@ -1,9 +1,9 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "howtoamplifyAuth_identitypool_500be178",
+    "identityPoolName": "howtoamplifyidentitypool",
     "allowUnauthenticatedIdentities": true,
-    "resourceNameTruncated": "howtoa500be178",
+    "resourceNameTruncated": "howtoacb3d5c9a",
     "userPoolName": "howtoamplifypool",
     "autoVerifiedAttributes": [
       "email"
@@ -39,9 +39,9 @@
       "name",
       "picture"
     ],
-    "userpoolClientLambdaRole": "howtoa500be178_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "howtoacb3d5c9a_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "500be178",
+    "sharedId": "cb3d5c9a",
     "resourceName": "howtoamplifyAuth",
     "authSelections": "identityPoolAndUserPool",
     "serviceName": "Cognito",
@@ -52,20 +52,6 @@
     "thirdPartyAuth": false,
     "authProviders": [],
     "usernameCaseSensitive": false,
-    "useEnabledMfas": true,
-    "authRoleArn": {
-      "Fn::GetAtt": [
-        "AuthRole",
-        "Arn"
-      ]
-    },
-    "unauthRoleArn": {
-      "Fn::GetAtt": [
-        "UnauthRole",
-        "Arn"
-      ]
-    },
-    "breakCircularDependency": true,
-    "dependsOn": []
+    "useEnabledMfas": true
   }
 }

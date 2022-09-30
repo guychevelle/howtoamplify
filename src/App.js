@@ -111,7 +111,7 @@ function App() {
           }
         </header>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home userInfo={user} />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />

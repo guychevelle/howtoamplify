@@ -1,22 +1,28 @@
-type Process @model @auth(rules: [{allow: owner}, {allow: private: [read]}]) {
+type Process @model @auth(rules: [{allow: private}, 
+                                  {allow: public, operations: [read],
+                                   provider: iam}]) {
   id: ID!
   name: String!
   description: String
-  picturekey: String
+  pictureurl: String
   steps: [Steps] @hasMany
 }
 
-type Steps @model @auth(rules: [{allow: owner}, {allow: private: [read]}]) {
+type Steps @model @auth(rules: [{allow: private}, 
+                                {allow: public, operations: [read],
+                                 provider: iam}]) {
   id: ID!
   stepnum: Int!
   name: String!
   description: String
-  picturekey: String
-  steptextkey: String
+  pictureurl: String
+  steptext: String
   code: Code @hasOne
 }
 
-type Code @model @auth(rules: [{allow: owner}, {allow: private: [read]}]) {
+type Code @model @auth(rules: [{allow: owner}, 
+                               {allow: public, operations: [read],
+                                provider: iam}]) {
   id: ID!
   codetextkey: String
 }

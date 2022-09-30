@@ -9,18 +9,28 @@ import * as queries from './graphql/queries';
 export default () => {
 
   const [steps, updateSteps] = useState(null);
+  const [stepitems, updateStepItems] = useState(null);
 
   function clickedItem (item) {
     console.log('clicked item', item);
     console.log('selected process:', item.name);
     console.log('with step count', item.steps.length);
+    updateStepItems(item.steps);
+  }
+
+  function clickedStep (item) {
+    console.log('clicked step', item);
   }
 
   async function getSteps() {
-    const allSteps = await API.graphql({ query: queries.listSteps });
+    const allSteps = await API.graphql({ query: queries.listSteps })
+                     .then((response) => console.log('response', response.data))
+                     .catch(error => null);
     console.log('allSteps', allSteps);
-    updateSteps(allSteps.data.listSteps.items);
-    console.log('steps', steps);
+    if (allSteps) {
+      updateSteps(allSteps.data.listSteps.items);
+      console.log('steps', steps);
+    }
   }
 
   if (!steps)
@@ -44,7 +54,12 @@ export default () => {
         <HowToProcessCollection overrideItems={({ item, index }) => ({
           onClick: () => clickedItem(item)
         })} />
-        <HowToStepsCollection />
+        <p></p>
+        {stepitems ? <HowToStepsCollection items={stepitems} 
+                       overrideItems={({ item, index }) => ({
+                         onClick: () => clickedStep(item)
+                     })} /> :
+                     'Process not selected'}
       </div>
     </div>
   );

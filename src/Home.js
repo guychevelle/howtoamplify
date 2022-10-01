@@ -66,11 +66,6 @@ export default (props) => {
                    ""}
         </ul>
       </div>
-    </div>
-  );
-};
-
-/*
       <div>
         <HowToProcessCollection overrideItems={({ item, index }) => ({
           onClick: () => clickedItem(item)
@@ -82,6 +77,11 @@ export default (props) => {
                      })} /> :
                      'Process not selected'}
       </div>
+    </div>
+  );
+};
+
+/*
           {steps ? steps.map((step, index) => (
                              <li key={step.id}>{step.name}</li>
                             )) :

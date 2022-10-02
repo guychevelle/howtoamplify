@@ -10,6 +10,10 @@ export default (props) => {
 
   console.log('home props', props);
 
+  const authmode = props.userInfo ? "AMAZON_COGNITO_USER_POOLS" :
+                                    "AWS_IAM";
+
+  const [processes, updateProcesses] = useState(null);
   const [steps, updateSteps] = useState(null);
   const [stepitems, updateStepItems] = useState(null);
 
@@ -24,9 +28,23 @@ export default (props) => {
     console.log('clicked step', item);
   }
 
+  function setProcesses (data) {
+    console.log('set process data', data);
+    updateProcesses(data.listProcesses.items.filter(function (a) {
+                                                    return !a._deleted}));
+  }
+
+  function handleGetProcessesError (error) {
+    console.log('handleGetProcessesError', error);
+    if (error.data)
+      console.log('data available');
+  }
+
   function setSteps (data) {
     console.log('set steps data', data);
-    updateSteps(data.listSteps.items);
+    //  filter out an '_deleted' entries
+    updateSteps(data.listSteps.items.filter(function (a) {
+                                            return !a._deleted}));
   }
 
   function handleGetStepsError (error) {
@@ -35,16 +53,25 @@ export default (props) => {
       updateSteps(error.data.listSteps.items);
   }
 
+  async function getProcesses () {
+    const allProcesses = await API.graphql({ query: queries.listProcesses,
+                                             authMode: authmode })
+                         .then((response) => setProcesses(response.data))
+                         .catch((error) => handleGetProcessesError(error));
+  }
+
+
   async function getSteps() {
     //  need to differentiate authenticated vs non-authenticated users
     console.log('in getSteps()');
-    const authmode = props.userInfo ? "AMAZON_COGNITO_USER_POOLS" :
-                                      "AWS_IAM";
     const allSteps = await API.graphql({ query: queries.listSteps,
                                          authMode: authmode })
                      .then((response) => setSteps(response.data))
                      .catch((error) => handleGetStepsError(error));
   }
+
+  if (!processes)
+    getProcesses();
 
   if (!steps)
     getSteps();
@@ -58,8 +85,16 @@ export default (props) => {
         {props.userInfo ? props.userInfo.attributes.name + ' content' :
                           'anonymous content'
         }
+        <p />
+        Processes:
         <ul>
-          <li key="1">dummy list item</li>
+          {processes ? processes.map((process, index) => (
+                                    <li key={process.id}>{process.name}</li>
+                                    )) :
+                       ""}
+        </ul>
+        Steps:
+        <ul>
           {steps ? steps.map((step, index) => (
                              <li key={step.id}>{step.name}</li>
                             )) :

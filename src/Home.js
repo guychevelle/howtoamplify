@@ -20,8 +20,11 @@ export default (props) => {
   function clickedItem (item) {
     console.log('clicked item', item);
     console.log('selected process:', item.name);
-    console.log('with step count', item.steps.length);
-    updateStepItems(item.steps);
+    /* used to call here when Process table was tied to UI component 
+       console.log('with step count', item.steps.length);
+       updateStepItems(item.steps);
+    */
+    getProcessSteps(item.id);
   }
 
   function clickedStep (item) {
@@ -53,6 +56,15 @@ export default (props) => {
       updateSteps(error.data.listSteps.items);
   }
 
+  function setProcessSteps (data) {
+    console.log('setprocess steps data', data);
+    updateStepItems(data.listSteps.items);
+  }
+
+  function handleGetProcessStepsError (error) {
+    console.log('handle getprocess steps error', error);
+  }
+
   async function getProcesses () {
     const allProcesses = await API.graphql({ query: queries.listProcesses,
                                              authMode: authmode })
@@ -61,6 +73,7 @@ export default (props) => {
   }
 
 
+  //  the below is getting ALL steps, not steps specific to a Process
   async function getSteps() {
     //  need to differentiate authenticated vs non-authenticated users
     console.log('in getSteps()');
@@ -69,6 +82,18 @@ export default (props) => {
                      .then((response) => setSteps(response.data))
                      .catch((error) => handleGetStepsError(error));
   }
+
+  //  get specific Steps based on selection of a Process in the UI
+  async function getProcessSteps(processid) {
+    console.log('getting steps for process id', processid);
+    const filter = { processStepsId: { eq: processid }};
+    const processSteps = await API.graphql({ query: queries.listSteps,
+                                             variables: { filter: filter},
+                                             authMode: authmode })
+                         .then((response) => setProcessSteps(response.data))
+                         .catch((error) => handleGetProcessStepsError(error));
+  }
+
 
   if (!processes)
     getProcesses();
@@ -102,9 +127,12 @@ export default (props) => {
         </ul>
       </div>
       <div>
-        <HowToProcessCollection overrideItems={({ item, index }) => ({
-          onClick: () => clickedItem(item)
-        })} />
+        {processes ? <HowToProcessCollection 
+                       items={processes}
+                       overrideItems={({ item, index }) => ({
+                         onClick: () => clickedItem(item)
+                       })} /> :
+                     'No processes defined'}
         <p></p>
         {stepitems ? <HowToStepsCollection items={stepitems} 
                        overrideItems={({ item, index }) => ({
@@ -117,6 +145,24 @@ export default (props) => {
 };
 
 /*
+How it used to be with Proceses connecting to the model
+      <div>
+        <HowToProcessCollection overrideItems={({ item, index }) => ({
+          onClick: () => clickedItem(item)
+        })} />
+        <p></p>
+        {stepitems ? <HowToStepsCollection items={stepitems} 
+                       overrideItems={({ item, index }) => ({
+                         onClick: () => clickedStep(item)
+                     })} /> :
+                     'Process not selected'}
+      </div>
+
+        <HowToProcessCollection overrideItems={({ item, index }) => ({
+          onClick: () => clickedItem(item)
+          })} />
+        <HowToProcessCollection overrideItems={({ item, index }) => ({
+          onClick: () => clickedItem(item)
           {steps ? steps.map((step, index) => (
                              <li key={step.id}>{step.name}</li>
                             )) :

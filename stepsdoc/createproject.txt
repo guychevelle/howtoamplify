@@ -58,15 +58,15 @@ steptextkey:
 Login to your GitHub account and select the '+' in the top right menu bar and select the 'New repository' option from the dropdown menu.
 <show drop down>
 
-stepnum: 4
+stepnum: 5
 name: Create the new repository
 description: You can select to create either a Public or Private repository.
 steptextkey:
-After entering the new repository name, click on the 'Create repository' button.
+Push your initial code to GitHubAfter entering the new repository name, click on the 'Create repository' button.
 
-stepnum: 5
+stepnum: 6
 name: Push your initial code to GitHub
-description: Create a main branch and push committed code to the remote GitHub repository.
+description: Create a main branch and push committed code to the remote GitHub repository. Confirm the code is in the main branch.
 steptextkey:
 Execute the below commands to add your project to the remote GitHub repository in a branch called 'main'.
 
@@ -93,13 +93,4 @@ Total 16 (delta 1), reused 0 (delta 0), pack-reused 0
 remote: Resolving deltas: 100% (1/1), completed with 1 local object.
 To https://github.com/myaccount/myproject.git
    0539d68..f605eec  main -> main
-
-
-
-stepnum: 6
-name: Verify GitHub repository branch content
-description: Navigate to your new repository in GitHub from your browser and confirm code is represented in the 'main' branch.
-
-<show picture from CI/CD google doc
-
 

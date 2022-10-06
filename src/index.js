@@ -42,6 +42,9 @@ const theme = {
           _hover: { color: { value: '{colors.blue.60}' }},
           _visited: { color: { value: '{colors.blue.90}' }}
         } 
+      },
+      textareafield: {
+        color: { value: '{colors.blue.90}' }
       }
     }
   }

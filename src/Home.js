@@ -58,7 +58,8 @@ export default (props) => {
 
   function setProcessSteps (data) {
     console.log('setprocess steps data', data);
-    updateStepItems(data.listSteps.items);
+    // don' know what order steps will be returned, sort stepnum ascending
+    updateStepItems(data.listSteps.items.sort((a, b) => { return a.stepnum - b.stepnum } ));
   }
 
   function handleGetProcessStepsError (error) {
@@ -134,9 +135,15 @@ export default (props) => {
                        })} /> :
                      'No processes defined'}
         <p></p>
-        {stepitems ? <HowToStepsCollection items={stepitems} 
+        {stepitems ? <HowToStepsCollection 
+                       items={stepitems} 
                        overrideItems={({ item, index }) => ({
-                         onClick: () => clickedStep(item)
+                         onClick: () => clickedStep(item),
+                         overrides: { TextAreaField: { 
+                                        rows: '10',
+                                        label: 'Step Actions'
+                                      } 
+                                    }
                      })} /> :
                      'Process not selected'}
       </div>

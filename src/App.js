@@ -1,6 +1,7 @@
 import './App.css';
 import './howtoamplify.css';
 import { useState, useEffect } from 'react';
+import { DataStore } from 'aws-amplify';
 import { Auth, Hub } from 'aws-amplify';
 import { Authenticator } from '@aws-amplify/ui-react';
 
@@ -98,17 +99,6 @@ function App() {
           <Navbarmenu isLoggedIn={loggedin} userData={user} />
         </div>
         <header>
-          {loggedin && user != null ?
-            <div>
-              {user.username} logged in
-              <button onClick={() => Auth.signOut()}>Sign Out</button>
-            </div>
-                    :
-            <div>
-              user not logged in, but have sign out button anyway
-              <button onClick={() => Auth.signOut()}>Sign Out</button>
-            </div> 
-          }
         </header>
         <Routes>
           <Route path="/" element={<Home userInfo={user} />} />

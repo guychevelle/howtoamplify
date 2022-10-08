@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { Text } from '@aws-amplify/ui-react';
 import { HowToProcess, HowToProcessCollection } from './ui-components';
 import { HowToStepsCollection } from './ui-components';
 
@@ -105,12 +106,51 @@ export default (props) => {
   return (
     <div>
       <p />
-      <h2>Home Page</h2>
+      <h2><center>How To Use AWS Amplify Tutorials</center></h2>
       <p />
       <div>
         {props.userInfo ? props.userInfo.attributes.name + ' content' :
                           'anonymous content'
         }
+      </div>
+      <p />
+      <div>
+        {processes ? <HowToProcessCollection 
+                       items={processes}
+                       overrideItems={({ item, index }) => ({
+                         onClick: () => clickedItem(item)
+                       })} /> :
+                     'No processes defined'}
+        <p></p>
+        {stepitems ? <HowToStepsCollection 
+                       items={stepitems} 
+                       overrideItems={({ item, index }) => ({
+                         onClick: () => clickedStep(item),
+                         overrides: { TextAreaField: { 
+                                        rows: '10',
+                                        label: (
+                                          <Text fontWeight="bold"
+                                                fontSize={12}
+                                                fontFamily="inter">
+                                            Step Actions
+                                          </Text>
+                                        )
+                                      } 
+                                    }
+                     })} /> :
+                     'Process not selected'}
+      </div>
+    </div>
+  );
+};
+
+/*
+                         overrides: { TextAreaField: { 
+                                        rows: '10',
+                                        label: 'Step Actions'
+                                      } 
+                                    }
+  process and steps displayed as html lists
         <p />
         Processes:
         <ul>
@@ -126,32 +166,7 @@ export default (props) => {
                             )) :
                    ""}
         </ul>
-      </div>
-      <div>
-        {processes ? <HowToProcessCollection 
-                       items={processes}
-                       overrideItems={({ item, index }) => ({
-                         onClick: () => clickedItem(item)
-                       })} /> :
-                     'No processes defined'}
-        <p></p>
-        {stepitems ? <HowToStepsCollection 
-                       items={stepitems} 
-                       overrideItems={({ item, index }) => ({
-                         onClick: () => clickedStep(item),
-                         overrides: { TextAreaField: { 
-                                        rows: '10',
-                                        label: 'Step Actions'
-                                      } 
-                                    }
-                     })} /> :
-                     'Process not selected'}
-      </div>
-    </div>
-  );
-};
 
-/*
 How it used to be with Proceses connecting to the model
       <div>
         <HowToProcessCollection overrideItems={({ item, index }) => ({

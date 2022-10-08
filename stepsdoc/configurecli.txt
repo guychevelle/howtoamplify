@@ -1,0 +1,52 @@
+
+Process:
+name: Configure Amplify CLI
+description: Use 'amplify configure' command to create an AWS user that commands will use to interact with AWS cloud services.
+pictureurl:  <awsiamicon.png>
+
+Steps:
+
+stepnum: 1
+name: Run amplify configure
+description: Initiate CLI configuration process. A browser session will be started to login to the AWS Console.
+picturekey: <consolelogin.png>
+steptextkey:
+copy from AWS Amplify Project Setup google doc to get text color
+
+stepnum: 2
+name: Specify user and region name
+description: After completing console login, go back to command line and continue by specifying an AWS region (use defalt us-east-1) and enter a user name. An IAM account will be created with this name. You will be directed back to the AWS Console to create the user. Click on the 'Next: Permissions' button.
+picturekey: <adduser1.png>
+steptext:
+copy specify region and user command text
+
+stepnum: 3
+name: Grant account access
+description: The console will select 'AdministratorAccess-Amplify'. Keep this selection and click on the 'Next: Tags' button.
+picturekey: <adduser2.png>
+steptext:
+N/A
+
+stepnum: 4
+name: Skip adding tags
+description: Tags are optional and have no effect on account usage.
+picturekey: <adduser3.png>
+steptext:
+N/A
+
+stepnum: 5
+name: Create the account
+description: Click on the 'Create User' button to initiate account creation.
+picturekey: <adduser4.png>
+steptext:
+N/A
+
+stepnum: 6
+name: Enter access keys and profile name
+description: DO NOT CLOSE THE ACCOUNT CREATION SCREEN! You will need to get the accessKeyId and secretAccessKey to paste into command line prompts. Click the 'Show' link on the console to display the secretAccessKey. You can leave the prompted Profile Name as 'default'. The Profile Name will be needed for the 'amplify init' command.
+picturekey: <adduser5.png>
+steptext:
+copy from google doc
+
+
+

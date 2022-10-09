@@ -42,6 +42,7 @@ export default function HowToProcessCollection(props) {
       {(item, index) => (
         <HowToProcess
           process={item}
+          margin="0px 10px 10px 10px"
           key={item.id}
           {...(overrideItems && overrideItems({ item, index }))}
         ></HowToProcess>

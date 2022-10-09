@@ -100,15 +100,17 @@ function App() {
         </div>
         <header>
         </header>
-        <Routes>
-          <Route path="/" element={<Home userInfo={user} />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
-          <Route path="/profile" element={<Profile 
-                                           userInfo={user}
-                                           userCheck={checkUser}/>} />
-        </Routes>
+        <div className="collectiondiv"  margin="25px">
+          <Routes>
+            <Route path="/" element={<Home userInfo={user} />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/logout" element={<Logout />} />
+            <Route path="/profile" element={<Profile 
+                                             userInfo={user}
+                                             userCheck={checkUser}/>} />
+          </Routes>
+        </div>
       </BrowserRouter>
     </div>
   );

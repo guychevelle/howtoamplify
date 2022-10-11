@@ -63,7 +63,7 @@ const Navbarmenu = (props) => {
               </ul>
             </li>
           :
-            <li className="menu-item " ><NavLink onClick={toggleClass} className='is-active' to={`/login`}> Login </NavLink> </li>
+            <li className="menu-item " ><NavLink onClick={toggleClass} className='is-active' to={'/login'}> Login </NavLink> </li>
 
 
     return (
@@ -92,6 +92,10 @@ const Navbarmenu = (props) => {
                    <NavLink className='is-active' onClick={toggleClass} to={`/`}> Home </NavLink> 
                  </li>
                  <li className="menu-item " ><NavLink onClick={toggleClass} className='is-active' to={`/about`}> About </NavLink> </li>
+                 { props.userData ?
+                   <li className="menu-item " ><NavLink onClick={toggleClass} className='is-active' to={`/load`}> Load </NavLink> </li>
+                   : ""
+                 }
                  <li className="menu-item " ><a href="https://runondemandgallery.com"> Back to Gallery </a> </li>
                  {useritem}
                </ul>

@@ -1,5 +1,7 @@
 import React from 'react';
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
+import { API } from 'aws-amplify';
+import * as mutations from './graphql/mutations';
 
 export default () => {
 
@@ -9,7 +11,9 @@ export default () => {
     console.log(fileInput);
   }
 
-  const handleFileChange = event => {
+  const [filedata, updateFileData] = useState(null);
+
+  async function handleFileChange(event) {
     const fileObj = event.target.files && event.target.files[0];
     console.log('file is ', fileObj.name);
     /* saveToS3(fileObj); */
@@ -19,14 +23,33 @@ export default () => {
       const text = e.target.result;
       const data = csvToArray(text);
       console.log(data);
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].firstname)
-          console.log(data[i].firstname);
-      }
-      console.log(JSON.stringify(data));
+      updateFileData(data);
+      //for (let i = 0; i < data.length; i++) {
+      //  if (data[i].firstname)
+      //    console.log(data[i].firstname);
+      //}
     };
 
     reader.readAsText(fileObj);
+  }
+
+  function handleCreateError (error) {
+    console.log('handle create process error', error);
+  }
+
+  async function checkData () {
+    console.log('state data', filedata);
+    if (filedata) {
+      const processData = {
+        name: filedata[0].name,
+        description: filedata[0].description,
+        pictureurl: filedata[0].pictureurl,
+      };
+      const createProcess = await API.graphql({ query: mutations.createProcess,
+                                                variables: { input: processData }})
+                            .then((response) => console.log('success', response))
+                            .catch((error) => handleCreateError(error));
+    }
   }
 
   function csvToArray(str, delimiter = ",") {
@@ -69,6 +92,7 @@ export default () => {
         type="file" accept=".csv"
         ref={fileInput}
         onChange={handleFileChange} />
+      <button onClick={checkData}>push me</button>
     </div>
   );
 };

@@ -13,6 +13,7 @@ import { Routes, Route } from 'react-router-dom';
 
 // routed content
 import Home from './Home';
+import Load from './Load';
 import Login from './Login';
 import Logout from './Logout';
 import Profile from './Profile';
@@ -104,6 +105,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home userInfo={user} />} />
             <Route path="/about" element={<About />} />
+            <Route path="/load" element={<Load />} />
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/profile" element={<Profile 

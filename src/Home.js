@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { Text } from '@aws-amplify/ui-react';
+import { useNavigate } from 'react-router-dom';
 import { HowToProcess, HowToProcessCollection } from './ui-components';
 import { HowToStepsCollection } from './ui-components';
 
@@ -11,6 +12,11 @@ export default (props) => {
 
   console.log('home props', props);
 
+  //  useNavigate() is a react-router-dom hook that lets us navigate
+  //  to a page without using a <Link>; Since it is a React 'Hook', it
+  //  must be declared in the top level function
+  let navigate = useNavigate();
+
   const authmode = props.userInfo ? "AMAZON_COGNITO_USER_POOLS" :
                                     "AWS_IAM";
 
@@ -18,14 +24,15 @@ export default (props) => {
   const [steps, updateSteps] = useState(null);
   const [stepitems, updateStepItems] = useState(null);
 
-  function clickedItem (item) {
+  function ClickedItem (item) {
     console.log('clicked item', item);
     console.log('selected process:', item.name);
     /* used to call here when Process table was tied to UI component 
        console.log('with step count', item.steps.length);
        updateStepItems(item.steps);
     */
-    getProcessSteps(item.id);
+    navigate("/steps");
+    //getProcessSteps(item.id);
   }
 
   function clickedStep (item) {
@@ -100,8 +107,8 @@ export default (props) => {
   if (!processes)
     getProcesses();
 
-  if (!steps)
-    getSteps();
+  //if (!steps)
+  //  getSteps();
 
   return (
     <div>
@@ -118,7 +125,7 @@ export default (props) => {
         {processes ? <HowToProcessCollection 
                        items={processes}
                        overrideItems={({ item, index }) => ({
-                         onClick: () => clickedItem(item)
+                         onClick: () => ClickedItem(item)
                        })} /> :
                      'No processes defined'}
         <p></p>
@@ -170,7 +177,7 @@ export default (props) => {
 How it used to be with Proceses connecting to the model
       <div>
         <HowToProcessCollection overrideItems={({ item, index }) => ({
-          onClick: () => clickedItem(item)
+          onClick: () => ClickedItem(item)
         })} />
         <p></p>
         {stepitems ? <HowToStepsCollection items={stepitems} 
@@ -181,10 +188,10 @@ How it used to be with Proceses connecting to the model
       </div>
 
         <HowToProcessCollection overrideItems={({ item, index }) => ({
-          onClick: () => clickedItem(item)
+          onClick: () => ClickedItem(item)
           })} />
         <HowToProcessCollection overrideItems={({ item, index }) => ({
-          onClick: () => clickedItem(item)
+          onClick: () => ClickedItem(item)
           {steps ? steps.map((step, index) => (
                              <li key={step.id}>{step.name}</li>
                             )) :

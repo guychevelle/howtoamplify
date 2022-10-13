@@ -10,9 +10,11 @@ import Navbarmenu from './Navbarmenu';
 //  router
 import { BrowserRouter } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // routed content
 import Home from './Home';
+import Steps from './Steps';
 import Load from './Load';
 import Login from './Login';
 import Logout from './Logout';
@@ -103,7 +105,8 @@ function App() {
         </header>
         <div className="collectiondiv"  margin="25px">
           <Routes>
-            <Route path="/" element={<Home userInfo={user} />} />
+            <Route path="/" element={<Home userInfo={user} /> } />
+            <Route path="/steps" element={<Steps />} />
             <Route path="/about" element={<About />} />
             <Route path="/load" element={<Load />} />
             <Route path="/login" element={<Login />} />

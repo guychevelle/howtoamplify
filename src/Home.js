@@ -10,8 +10,6 @@ import * as queries from './graphql/queries';
 
 export default (props) => {
 
-  console.log('home props', props);
-
   //  useNavigate() is a react-router-dom hook that lets us navigate
   //  to a page without using a <Link>; Since it is a React 'Hook', it
   //  must be declared in the top level function
@@ -22,21 +20,13 @@ export default (props) => {
 
   const [processes, updateProcesses] = useState(null);
   const [steps, updateSteps] = useState(null);
-  const [stepitems, updateStepItems] = useState(null);
 
   function ClickedItem (item) {
     console.log('clicked item', item);
     console.log('selected process:', item.name);
-    /* used to call here when Process table was tied to UI component 
-       console.log('with step count', item.steps.length);
-       updateStepItems(item.steps);
-    */
+    // update the selected Process in the calling parent code
+    props.updateItem(item);
     navigate("/steps");
-    //getProcessSteps(item.id);
-  }
-
-  function clickedStep (item) {
-    console.log('clicked step', item);
   }
 
   function setProcesses (data) {
@@ -64,16 +54,6 @@ export default (props) => {
       updateSteps(error.data.listSteps.items);
   }
 
-  function setProcessSteps (data) {
-    console.log('setprocess steps data', data);
-    // don' know what order steps will be returned, sort stepnum ascending
-    updateStepItems(data.listSteps.items.sort((a, b) => { return a.stepnum - b.stepnum } ));
-  }
-
-  function handleGetProcessStepsError (error) {
-    console.log('handle getprocess steps error', error);
-  }
-
   async function getProcesses () {
     const allProcesses = await API.graphql({ query: queries.listProcesses,
                                              authMode: authmode })
@@ -91,18 +71,6 @@ export default (props) => {
                      .then((response) => setSteps(response.data))
                      .catch((error) => handleGetStepsError(error));
   }
-
-  //  get specific Steps based on selection of a Process in the UI
-  async function getProcessSteps(processid) {
-    console.log('getting steps for process id', processid);
-    const filter = { processStepsId: { eq: processid }};
-    const processSteps = await API.graphql({ query: queries.listSteps,
-                                             variables: { filter: filter},
-                                             authMode: authmode })
-                         .then((response) => setProcessSteps(response.data))
-                         .catch((error) => handleGetProcessStepsError(error));
-  }
-
 
   if (!processes)
     getProcesses();
@@ -128,35 +96,13 @@ export default (props) => {
                          onClick: () => ClickedItem(item)
                        })} /> :
                      'No processes defined'}
-        <p></p>
-        {stepitems ? <HowToStepsCollection 
-                       items={stepitems} 
-                       overrideItems={({ item, index }) => ({
-                         onClick: () => clickedStep(item),
-                         overrides: { TextAreaField: { 
-                                        rows: '10',
-                                        label: (
-                                          <Text fontWeight="bold"
-                                                fontSize={12}
-                                                fontFamily="inter">
-                                            Step Actions
-                                          </Text>
-                                        )
-                                      } 
-                                    }
-                     })} /> :
-                     'Process not selected'}
+        <p />
       </div>
     </div>
   );
 };
 
 /*
-                         overrides: { TextAreaField: { 
-                                        rows: '10',
-                                        label: 'Step Actions'
-                                      } 
-                                    }
   process and steps displayed as html lists
         <p />
         Processes:

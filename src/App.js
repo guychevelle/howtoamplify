@@ -31,6 +31,12 @@ function App() {
   const [loggedin, updateLoggedIn] = useState(false);
   const [authactioncount, updateAuthActionCount] = useState(0);
 
+  // we need to track the Process item selected in the Home page
+  // so we can send Process data to the Steps page so that Steps
+  // table data can be queried. The update function will be passed
+  // to the Home function so it can set the value
+  const [selectedprocessitem, updateSelectedProcessItem] = useState(null);
+
   // add authactioncount as the 2nd arg to useEffect() to create
   // a dependency.  whenever authactioncount changes, useEffect()
   // will be triggered to run and cause the page to be re-rendered
@@ -105,8 +111,10 @@ function App() {
         </header>
         <div className="collectiondiv"  margin="25px">
           <Routes>
-            <Route path="/" element={<Home userInfo={user} /> } />
-            <Route path="/steps" element={<Steps />} />
+            <Route path="/" element={<Home userInfo={user} 
+                                           updateItem={updateSelectedProcessItem} /> } />
+            <Route path="/steps" element={<Steps userInfo={user}
+                                                 processItem={selectedprocessitem} />} />
             <Route path="/about" element={<About />} />
             <Route path="/load" element={<Load />} />
             <Route path="/login" element={<Login />} />

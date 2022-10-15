@@ -1,0 +1,3 @@
+pk,processkey,stepnum,name,description,pictureurl,steptext
+1,1,1,first step,first thing we will do is...,https://howtoamplify-bucket155250-sbxa.s3.amazonaws.com/public/blankwall.png,can we have a\r\nmulti line text
+2,1,2,next step,can we possibly add 2 steps,https://howtoamplify-bucket155250-sbxa.s3.amazonaws.com/public/blankwall.png,another\r\nmulti line set of steps

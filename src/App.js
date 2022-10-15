@@ -24,6 +24,16 @@ import About from './About';
 
 
 function App() {
+
+  //  window size related functionality
+  //  from https://bobbyhadz.com/blog/react-get-window-width-height
+  const [windowSize, setWindowSize] = useState(getWindowSize());
+
+  function getWindowSize() {
+    const {innerWidth, innerHeight} = window;
+    return {innerWidth, innerHeight};
+  }
+
   //  do the below 2 lines consider a user is logged out just because
   //  the browser is refreshed, but they may still be logged in to
   //  cognito??
@@ -43,14 +53,21 @@ function App() {
   // (normally not done when using react-router-dom)
   useEffect(() => {
     console.log('running useEffect');
+    //  set page <head> meta data
+    document.title = "Gallery: How to Amplify";
+    document.querySelector('meta[name="description"]').setAttribute("content", "Application demonstrating authentication, database, and storage usage in Amplify");
+    document.querySelector('meta[name="keywords"]').setAttribute("content", "react gallery template applications");
+
+    function handleWindowResize() {
+      setWindowSize(getWindowSize());
+    }
+
+    window.addEventListener('resize', handleWindowResize);
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+
     checkUser();
-    //  checkUser() is async, so it's execution will be queued.
-    //  the code below will continue before checkUser() runs, so
-    //  no need to check user value here
-    //if (user != null)
-    //  console.log("user exists", user);
-    //else
-    //  console.log("user is null");
     setAuthListener();
     console.log('authactioncount=', authactioncount);
   }, [authactioncount]);

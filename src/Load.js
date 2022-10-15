@@ -1,54 +1,94 @@
 import React from 'react';
-import { useState, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { API } from 'aws-amplify';
 import * as mutations from './graphql/mutations';
 
 export default () => {
 
-  const fileInput = useRef(null);
-  const selectFile = () => {
-    fileInput.current.click();
-    console.log(fileInput);
-  }
+  const [processdata, updateProcessData] = useState(null);
+  const [stepsdata, updateStepsData] = useState(null);
+  const [loadenabled, updateLoadEnabled] = useState(false);
+  const [enablecount, updateEnableCount] = useState(0);
 
-  const [filedata, updateFileData] = useState(null);
-
-  async function handleFileChange(event) {
-    const fileObj = event.target.files && event.target.files[0];
-    console.log('file is ', fileObj.name);
-    /* saveToS3(fileObj); */
+  useEffect(() => {
+    console.log('running useEffect');
+  }, [enablecount]);
+  
+  async function readFileData(fileobj, updatefunc) {
     const reader = new FileReader();
 
     reader.onload = function (e) {
       const text = e.target.result;
       const data = csvToArray(text);
       console.log(data);
-      updateFileData(data);
-      //for (let i = 0; i < data.length; i++) {
-      //  if (data[i].firstname)
-      //    console.log(data[i].firstname);
-      //}
+      updatefunc(data);
     };
 
-    reader.readAsText(fileObj);
+    reader.readAsText(fileobj);
   }
 
-  function handleCreateError (error) {
+  function handleProcessFileChange(event) {
+    const fileObj = event.target.files && event.target.files[0];
+    console.log('process file is', fileObj.name);
+    readFileData(fileObj, updateProcessData);
+    if (stepsdata) {
+      updateLoadEnabled(true);
+      updateEnableCount(enablecount+1);
+    }
+  }
+
+  function handleStepsFileChange(event) {
+    const fileObj = event.target.files && event.target.files[0];
+    console.log('steps file is', fileObj.name);
+    readFileData(fileObj, updateStepsData);
+    if (processdata) {
+      updateLoadEnabled(true);
+      updateEnableCount(enablecount+1);
+    }
+  }
+
+  function handleCreateProcessError (error) {
     console.log('handle create process error', error);
   }
 
-  async function checkData () {
-    console.log('state data', filedata);
-    if (filedata) {
+  function handleCreateStepError (error) {
+    console.log('handle create step error', error);
+  }
+
+  async function loadSteps (processfileitem, createdprocessdata) {
+    console.log('created process data', createdprocessdata);
+    for (let i = 0; i < stepsdata.length; i++) {
+      if (!stepsdata[i])
+        continue;
+      if (stepsdata[i].processkey == processfileitem.pk) {
+        let stepdata = {
+          stepnum: stepsdata[i].stepnum,
+          name: stepsdata[i].name,
+          description: stepsdata[i].description,
+          pictureurl: stepsdata[i].pictureurl,
+          steptext: stepsdata[i].steptext,
+          processStepsId: createdprocessdata.data.createProcess.id
+        }
+        let steps = await API.graphql({ query: mutations.createSteps,
+                                        variables: { input: stepdata }})
+                    .then((response) => console.log('created step', response))
+                    .catch((error) => handleCreateStepError(error));
+      }
+    }
+  }
+
+  async function loadData () {
+    console.log('state data', processdata);
+    if (processdata) {
       const processData = {
-        name: filedata[0].name,
-        description: filedata[0].description,
-        pictureurl: filedata[0].pictureurl,
+        name: processdata[0].name,
+        description: processdata[0].description,
+        pictureurl: processdata[0].pictureurl,
       };
       const createProcess = await API.graphql({ query: mutations.createProcess,
                                                 variables: { input: processData }})
-                            .then((response) => console.log('success', response))
-                            .catch((error) => handleCreateError(error));
+                            .then((response) => loadSteps(processdata[0], response))
+                            .catch((error) => handleCreateProcessError(error));
     }
   }
 
@@ -90,9 +130,16 @@ export default () => {
       <p />
       <input
         type="file" accept=".csv"
-        ref={fileInput}
-        onChange={handleFileChange} />
-      <button onClick={checkData}>push me</button>
+        onChange={handleProcessFileChange} />
+      <p />
+      Choose Steps table file
+      <p />
+      <input
+        type="file" accept=".csv"
+        onChange={handleStepsFileChange} />
+      <p />
+      {loadenabled ? <button onClick={loadData}>Load Data</button> :
+                    <button disabled>Load Data</button>}
     </div>
   );
 };

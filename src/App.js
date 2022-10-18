@@ -53,6 +53,9 @@ function App() {
   // (normally not done when using react-router-dom)
   useEffect(() => {
     console.log('running useEffect');
+    checkUser();
+    setAuthListener();
+
     //  set page <head> meta data
     document.title = "Gallery: How to Amplify";
     document.querySelector('meta[name="description"]').setAttribute("content", "Application demonstrating authentication, database, and storage usage in Amplify");
@@ -67,8 +70,6 @@ function App() {
       window.removeEventListener('resize', handleWindowResize);
     };
 
-    checkUser();
-    setAuthListener();
     console.log('authactioncount=', authactioncount);
   }, [authactioncount]);
 
@@ -129,8 +130,10 @@ function App() {
         <div className="collectiondiv"  margin="25px">
           <Routes>
             <Route path="/" element={<Home userInfo={user} 
+                                           screenWidth={windowSize.innerWidth}
                                            updateItem={updateSelectedProcessItem} /> } />
             <Route path="/steps" element={<Steps userInfo={user}
+                                                 screenWidth={windowSize.innerWidth}
                                                  processItem={selectedprocessitem} />} />
             <Route path="/about" element={<About />} />
             <Route path="/load" element={<Load />} />

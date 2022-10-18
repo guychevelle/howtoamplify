@@ -78,6 +78,19 @@ export default (props) => {
   //if (!steps)
   //  getSteps();
 
+  const processCollectionOverrides = props.screenWidth < 700
+    ? {
+       "HowToProcessCollection": {
+         type: "list"
+       }
+      }
+    : {
+       "HowToProcessCollection": {
+         type: "grid",
+         templateColumns: "1fr 1fr"
+       }
+      }
+
   return (
     <div>
       <p />
@@ -92,8 +105,10 @@ export default (props) => {
       <div>
         {processes ? <HowToProcessCollection 
                        items={processes}
+                       overrides={processCollectionOverrides}
                        overrideItems={({ item, index }) => ({
-                         onClick: () => ClickedItem(item)
+                         onClick: () => ClickedItem(item),
+                         width: '350px'
                        })} /> :
                      'No processes defined'}
         <p />

@@ -6,7 +6,6 @@
 
 /* eslint-disable */
 import React from "react";
-import { SortDirection } from "@aws-amplify/datastore";
 import { Steps } from "../models";
 import {
   getOverrideProps,
@@ -16,18 +15,18 @@ import HowToStep from "./HowToStep";
 import { Collection } from "@aws-amplify/ui-react";
 export default function HowToStepsCollection(props) {
   const { items: itemsProp, overrideItems, overrides, ...rest } = props;
-  const itemsPagination = { sort: (s) => s.stepnum(SortDirection.ASCENDING) };
   const itemsDataStore = useDataStoreBinding({
     type: "collection",
     model: Steps,
-    pagination: itemsPagination,
   }).items;
   const items = itemsProp !== undefined ? itemsProp : itemsDataStore;
   return (
     <Collection
-      type="list"
+      type="grid"
       searchPlaceholder="Search..."
-      direction="column"
+      templateColumns="1fr 1fr"
+      autoFlow="row"
+      alignItems="stretch"
       justifyContent="stretch"
       items={items || []}
       {...rest}
@@ -36,6 +35,7 @@ export default function HowToStepsCollection(props) {
       {(item, index) => (
         <HowToStep
           steps={item}
+          margin="0 10px 10px 0"
           key={item.id}
           {...(overrideItems && overrideItems({ item, index }))}
         ></HowToStep>

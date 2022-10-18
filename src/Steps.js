@@ -42,6 +42,18 @@ export default (props) => {
   if (!steps)
     getProcessSteps(props.processItem.id);
 
+  const stepCollectionOverrides = props.screenWidth < 700
+    ? {
+       "HowToStepsCollection": {
+         type: "list"
+       }
+      }
+    : {
+       "HowToStepsCollection": {
+         type: "grid",
+         templateColumns: "1fr 1fr"
+       }
+      }
   
   return (
     <div>
@@ -54,8 +66,10 @@ export default (props) => {
       <p />
       {steps ? <HowToStepsCollection
                      items={steps}
+                     overrides={stepCollectionOverrides}
                      overrideItems={({ item, index }) => ({
                        onClick: () => clickedStep(item),
+                       width: '350px',
                        overrides: { TextAreaField: {
                                       rows: '10',
                                       label: (

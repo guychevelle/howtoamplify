@@ -12,7 +12,7 @@ export default function MyCard(props) {
   const { overrides, ...rest } = props;
   return (
     <View
-      width="420px"
+      width="350px"
       height="500px"
       position="relative"
       padding="0px 0px 0px 0px"
@@ -59,8 +59,8 @@ export default function MyCard(props) {
         {...getOverrideProps(overrides, "Cost")}
       ></Text>
       <Image
-        width="420px"
-        height="427px"
+        width="350px"
+        height="420px"
         position="absolute"
         top="0px"
         left="0px"

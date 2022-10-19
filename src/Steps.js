@@ -69,7 +69,7 @@ export default (props) => {
                      overrides={stepCollectionOverrides}
                      overrideItems={({ item, index }) => ({
                        onClick: () => clickedStep(item),
-                       width: '365px',
+                       width: '350px',
                        overrides: { TextAreaField: {
                                       rows: '10',
                                       label: (

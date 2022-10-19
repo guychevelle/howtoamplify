@@ -18,7 +18,7 @@ export default function HowToStep(props) {
   const { steps, overrides, ...rest } = props;
   return (
     <View
-      width="370px"
+      width="365px"
       height="331px"
       overflow="hidden"
       position="relative"

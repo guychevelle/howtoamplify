@@ -35,7 +35,7 @@ export default function HowToStepsCollection(props) {
       {(item, index) => (
         <HowToStep
           steps={item}
-          margin="0 10px 10px 0"
+          margin="0 10px 10px 10px"
           key={item.id}
           {...(overrideItems && overrideItems({ item, index }))}
         ></HowToStep>

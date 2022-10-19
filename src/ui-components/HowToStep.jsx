@@ -18,8 +18,8 @@ export default function HowToStep(props) {
   const { steps, overrides, ...rest } = props;
   return (
     <View
-      width="370px"
-      height="331px"
+      width="360px"
+      height="400px"
       overflow="hidden"
       position="relative"
       padding="0px 0px 0px 0px"
@@ -28,8 +28,8 @@ export default function HowToStep(props) {
       {...getOverrideProps(overrides, "HowToStep")}
     >
       <Image
-        width="180px"
-        height="180px"
+        width="182px"
+        height="200px"
         position="absolute"
         top="0px"
         left="0px"
@@ -37,26 +37,6 @@ export default function HowToStep(props) {
         src={steps?.pictureurl}
         {...getOverrideProps(overrides, "steppic")}
       ></Image>
-      <Text
-        fontFamily="Inter"
-        fontSize="12px"
-        fontWeight="700"
-        color="rgba(0,0,0,1)"
-        lineHeight="14.0625px"
-        textAlign="left"
-        display="flex"
-        direction="column"
-        justifyContent="flex-start"
-        width="172px"
-        height="16px"
-        position="absolute"
-        top="27px"
-        left="188px"
-        padding="0px 0px 0px 0px"
-        whiteSpace="pre-wrap"
-        children={steps?.name}
-        {...getOverrideProps(overrides, "stepname")}
-      ></Text>
       <Text
         fontFamily="Inter"
         fontSize="12px"
@@ -103,8 +83,8 @@ export default function HowToStep(props) {
         display="flex"
         direction="column"
         justifyContent="flex-start"
-        width="170px"
-        height="100px"
+        width="160px"
+        height="153px"
         position="absolute"
         top="47px"
         left="188px"
@@ -117,8 +97,8 @@ export default function HowToStep(props) {
         display="flex"
         gap="0"
         position="absolute"
-        top="147px"
-        left="192px"
+        top="361px"
+        left="105px"
         justifyContent="center"
         alignItems="center"
         size="small"
@@ -130,11 +110,11 @@ export default function HowToStep(props) {
       <TextAreaField
         display="flex"
         position="absolute"
-        top="191px"
-        left="45px"
+        top="213px"
+        left="43px"
         direction="column"
-        width="280px"
-        height="121px"
+        width="279px"
+        height="144px"
         padding="0px 0px 0px 0px"
         label="Step Actions:"
         size="small"

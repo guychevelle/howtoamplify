@@ -18,8 +18,8 @@ export default function HowToStep(props) {
   const { steps, overrides, ...rest } = props;
   return (
     <View
-      width="900px"
-      height="450px"
+      width="360px"
+      height="400px"
       overflow="hidden"
       position="relative"
       padding="0px 0px 0px 0px"
@@ -28,8 +28,8 @@ export default function HowToStep(props) {
       {...getOverrideProps(overrides, "HowToStep")}
     >
       <Image
-        width="450px"
-        height="450px"
+        width="182px"
+        height="200px"
         position="absolute"
         top="0px"
         left="0px"
@@ -47,29 +47,9 @@ export default function HowToStep(props) {
         display="flex"
         direction="column"
         justifyContent="flex-start"
-        width="374px"
-        height="16px"
         position="absolute"
-        top="50px"
-        left="472px"
-        padding="0px 0px 0px 0px"
-        whiteSpace="pre-wrap"
-        children={steps?.name}
-        {...getOverrideProps(overrides, "stepname")}
-      ></Text>
-      <Text
-        fontFamily="Inter"
-        fontSize="12px"
-        fontWeight="700"
-        color="rgba(0,0,0,1)"
-        lineHeight="14.0625px"
-        textAlign="left"
-        display="flex"
-        direction="column"
-        justifyContent="flex-start"
-        position="absolute"
-        top="18px"
-        left="472px"
+        top="8px"
+        left="188px"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
         children="Step Number:"
@@ -86,12 +66,32 @@ export default function HowToStep(props) {
         direction="column"
         justifyContent="flex-start"
         position="absolute"
-        top="18px"
-        left="575px"
+        top="8px"
+        left="283px"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
         children={steps?.stepnum}
         {...getOverrideProps(overrides, "stepnum")}
+      ></Text>
+      <Text
+        fontFamily="Inter"
+        fontSize="12px"
+        fontWeight="700"
+        color="rgba(0,0,0,1)"
+        lineHeight="14.0625px"
+        textAlign="left"
+        display="flex"
+        direction="column"
+        justifyContent="flex-start"
+        width="162px"
+        height="16px"
+        position="absolute"
+        top="26px"
+        left="188px"
+        padding="0px 0px 0px 0px"
+        whiteSpace="pre-wrap"
+        children={steps?.name}
+        {...getOverrideProps(overrides, "stepname")}
       ></Text>
       <Text
         fontFamily="Inter"
@@ -103,11 +103,11 @@ export default function HowToStep(props) {
         display="flex"
         direction="column"
         justifyContent="flex-start"
-        width="405px"
-        height="58px"
+        width="158px"
+        height="144px"
         position="absolute"
-        top="80px"
-        left="472px"
+        top="56px"
+        left="188px"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
         children={steps?.description}
@@ -117,8 +117,8 @@ export default function HowToStep(props) {
         display="flex"
         gap="0"
         position="absolute"
-        top="408px"
-        left="597px"
+        top="361px"
+        left="105px"
         justifyContent="center"
         alignItems="center"
         size="small"
@@ -130,11 +130,11 @@ export default function HowToStep(props) {
       <TextAreaField
         display="flex"
         position="absolute"
-        top="166px"
-        left="472px"
+        top="213px"
+        left="43px"
         direction="column"
-        width="405px"
-        height="226px"
+        width="279px"
+        height="144px"
         padding="0px 0px 0px 0px"
         label="Step Actions:"
         size="small"

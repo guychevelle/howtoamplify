@@ -1,6 +1,7 @@
 import './App.css';
 import './howtoamplify.css';
 import { useState, useEffect } from 'react';
+import { DataStore } from 'aws-amplify';
 import { Auth, Hub } from 'aws-amplify';
 import { Authenticator } from '@aws-amplify/ui-react';
 
@@ -9,9 +10,12 @@ import Navbarmenu from './Navbarmenu';
 //  router
 import { BrowserRouter } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // routed content
 import Home from './Home';
+import Steps from './Steps';
+import Load from './Load';
 import Login from './Login';
 import Logout from './Logout';
 import Profile from './Profile';
@@ -20,12 +24,28 @@ import About from './About';
 
 
 function App() {
+
+  //  window size related functionality
+  //  from https://bobbyhadz.com/blog/react-get-window-width-height
+  const [windowSize, setWindowSize] = useState(getWindowSize());
+
+  function getWindowSize() {
+    const {innerWidth, innerHeight} = window;
+    return {innerWidth, innerHeight};
+  }
+
   //  do the below 2 lines consider a user is logged out just because
   //  the browser is refreshed, but they may still be logged in to
   //  cognito??
   const [user, updateUser] = useState(null);
   const [loggedin, updateLoggedIn] = useState(false);
   const [authactioncount, updateAuthActionCount] = useState(0);
+
+  // we need to track the Process item selected in the Home page
+  // so we can send Process data to the Steps page so that Steps
+  // table data can be queried. The update function will be passed
+  // to the Home function so it can set the value
+  const [selectedprocessitem, updateSelectedProcessItem] = useState(null);
 
   // add authactioncount as the 2nd arg to useEffect() to create
   // a dependency.  whenever authactioncount changes, useEffect()
@@ -34,14 +54,22 @@ function App() {
   useEffect(() => {
     console.log('running useEffect');
     checkUser();
-    //  checkUser() is async, so it's execution will be queued.
-    //  the code below will continue before checkUser() runs, so
-    //  no need to check user value here
-    //if (user != null)
-    //  console.log("user exists", user);
-    //else
-    //  console.log("user is null");
     setAuthListener();
+
+    //  set page <head> meta data
+    document.title = "Gallery: How to Amplify";
+    document.querySelector('meta[name="description"]').setAttribute("content", "Application demonstrating authentication, database, and storage usage in Amplify");
+    document.querySelector('meta[name="keywords"]').setAttribute("content", "react gallery template applications");
+
+    function handleWindowResize() {
+      setWindowSize(getWindowSize());
+    }
+
+    window.addEventListener('resize', handleWindowResize);
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+
     console.log('authactioncount=', authactioncount);
   }, [authactioncount]);
 
@@ -98,27 +126,24 @@ function App() {
           <Navbarmenu isLoggedIn={loggedin} userData={user} />
         </div>
         <header>
-          {loggedin && user != null ?
-            <div>
-              {user.username} logged in
-              <button onClick={() => Auth.signOut()}>Sign Out</button>
-            </div>
-                    :
-            <div>
-              user not logged in, but have sign out button anyway
-              <button onClick={() => Auth.signOut()}>Sign Out</button>
-            </div> 
-          }
         </header>
-        <Routes>
-          <Route path="/" element={<Home userInfo={user} />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
-          <Route path="/profile" element={<Profile 
-                                           userInfo={user}
-                                           userCheck={checkUser}/>} />
-        </Routes>
+        <div className="collectiondiv"  margin="25px">
+          <Routes>
+            <Route path="/" element={<Home userInfo={user} 
+                                           screenWidth={windowSize.innerWidth}
+                                           updateItem={updateSelectedProcessItem} /> } />
+            <Route path="/steps" element={<Steps userInfo={user}
+                                                 screenWidth={windowSize.innerWidth}
+                                                 processItem={selectedprocessitem} />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/load" element={<Load />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/logout" element={<Logout />} />
+            <Route path="/profile" element={<Profile 
+                                             userInfo={user}
+                                             userCheck={checkUser}/>} />
+          </Routes>
+        </div>
       </BrowserRouter>
     </div>
   );

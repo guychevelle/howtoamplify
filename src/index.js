@@ -6,12 +6,21 @@ import reportWebVitals from './reportWebVitals';
 
 //  AWS Amplify related
 import "@aws-amplify/ui-react/styles.css";
+import { DataStore, AuthModeStrategyType } from 'aws-amplify';
 import { AmplifyProvider } from "@aws-amplify/ui-react";
 import { ThemeProvider } from "@aws-amplify/ui-react";
 import Amplify from 'aws-amplify';
 import config from './aws-exports';
 
-Amplify.configure(config)
+//  additional DataStore configuration to avoid subscription errors
+//  when using multiple auth modes (cognito + IAM). aws-amplify bug
+//  reference:  https://github.com/aws-amplify/amplify-js/issues/9369
+Amplify.configure({
+   ...config,
+   DataStore: {
+     authModeStrategyType: AuthModeStrategyType.MULTI_AUTH
+   }
+  });
 
 const theme = {
   name: 'howto-theme',
@@ -42,6 +51,9 @@ const theme = {
           _hover: { color: { value: '{colors.blue.60}' }},
           _visited: { color: { value: '{colors.blue.90}' }}
         } 
+      },
+      textareafield: {
+        color: { value: '{colors.blue.90}' }
       }
     }
   }

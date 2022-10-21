@@ -6,6 +6,7 @@
 
 export { default as CommentCard } from "./CommentCard";
 export { default as FAQItem } from "./FAQItem";
+export { default as HowToStepsCollection } from "./HowToStepsCollection";
 export { default as SideBar } from "./SideBar";
 export { default as HeroLayout4 } from "./HeroLayout4";
 export { default as GalleryLogo } from "./GalleryLogo";
@@ -31,7 +32,6 @@ export { default as StandardCard } from "./StandardCard";
 export { default as ProductCard } from "./ProductCard";
 export { default as ProductDetail } from "./ProductDetail";
 export { default as GalleryEditProfile } from "./GalleryEditProfile";
-export { default as HowToStepsCollection } from "./HowToStepsCollection";
 export { default as ActionCard } from "./ActionCard";
 export { default as HeroLayout2 } from "./HeroLayout2";
 export { default as ContactUs } from "./ContactUs";

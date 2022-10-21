@@ -1,2 +1,4 @@
-pk,name,description,pictureurl
-1,test,test out item creation,https://howtoamplify-bucket155250-sbxa.s3.amazonaws.com/public/awsiamicon.png
+pk,name,description,pictureurl,categorykey
+1,Create React project and GitHub repository,An auto-generated React project will be the basis for all examples,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/reactlogo.png,1
+2,Configure Amplify CLI,Use 'amplify configure' command to create an AWS user that commands will use to interact with AWS cloud services.,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/awsiamicon.png,1
+3,Add Authentication,Use amplify CLI to add authentication service,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/signin.png,2

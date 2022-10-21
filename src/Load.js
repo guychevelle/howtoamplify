@@ -5,15 +5,26 @@ import * as mutations from './graphql/mutations';
 
 export default () => {
 
+  const [categorydata, updateCategoryData] = useState(null);
+  const [catkeys, updateCatKeys] = useState([]);
   const [processdata, updateProcessData] = useState(null);
   const [stepsdata, updateStepsData] = useState(null);
   const [loadenabled, updateLoadEnabled] = useState(false);
   const [enablecount, updateEnableCount] = useState(0);
+  // we will update a status message on the page during load; not
+  // a needed user feature, but other data like catkeys will not
+  // reflect updates unless the page is re-rendered (it's a useState()
+  // feature/flaw
+  const [loadstatus, updateLoadStatus] = useState(null);
 
   useEffect(() => {
     console.log('running useEffect');
-  }, [enablecount]);
+  }, [enablecount, loadstatus]);
   
+  useEffect(() => {
+    console.log('catkeys useeffect', catkeys);
+  }, [catkeys]);
+
   async function readFileData(fileobj, updatefunc) {
     const reader = new FileReader();
 
@@ -25,6 +36,12 @@ export default () => {
     };
 
     reader.readAsText(fileobj);
+  }
+
+  function handleCategoryFileChange(event) {
+    const fileObj = event.target.files && event.target.files[0];
+    console.log('category file is', fileObj.name);
+    readFileData(fileObj, updateCategoryData);
   }
 
   function handleProcessFileChange(event) {
@@ -47,6 +64,15 @@ export default () => {
     }
   }
 
+  function processCategoryAdd(data, pk) {
+    console.log('processcategoryadd', data);
+    updateCatKeys(current => [...current, {id: data.data.createCategory.id, key: pk}]);
+  }
+
+  function handleCreateCategoryError (error) {
+    console.log('handle create category error', error);
+  }
+
   function handleCreateProcessError (error) {
     console.log('handle create process error', error);
   }
@@ -58,9 +84,9 @@ export default () => {
   async function loadSteps (processfileitem, createdprocessdata) {
     console.log('created process data', createdprocessdata);
     for (let i = 0; i < stepsdata.length; i++) {
-      if (!stepsdata[i])
+      if (!stepsdata[i].name)
         continue;
-      if (stepsdata[i].processkey == processfileitem.pk) {
+      if (stepsdata[i].processkey === processfileitem.pk) {
         let stepdata = {
           stepnum: stepsdata[i].stepnum,
           name: stepsdata[i].name,
@@ -77,18 +103,58 @@ export default () => {
     }
   }
 
+  async function loadCategories () {
+    console.log('load categories', categorydata);
+    for (let i = 0; i < categorydata.length; i++) {
+      if (!categorydata[i].name)
+        continue;
+
+      updateLoadStatus('loading category ' + i.toString() + ' of ' + (categorydata.length-1).toString());
+
+      let catdata = {
+        name: categorydata[i].name,
+        order: categorydata[i].order
+      }
+
+      let cat = await API.graphql({ query: mutations.createCategory,
+                                    variables: { input: catdata }})
+                .then((response) => processCategoryAdd(response, categorydata[i].pk))
+                .catch((error) => handleCreateCategoryError(error));
+    }
+    updateLoadStatus('category load complete');
+  }
+
+  function getCategoryId (processcatkey) {
+    for (let i = 0; i < catkeys.length; i++)
+      if (processcatkey == catkeys[i].key)
+        return catkeys[i].id;
+    return null;
+  }
+
   async function loadData () {
     console.log('state data', processdata);
     if (processdata) {
-      const processData = {
-        name: processdata[0].name,
-        description: processdata[0].description,
-        pictureurl: processdata[0].pictureurl,
-      };
-      const createProcess = await API.graphql({ query: mutations.createProcess,
+      for (let i = 0; i < processdata.length; i++) {
+        if (!processdata[i].name)
+          continue;
+
+        const catid = getCategoryId(processdata[i].categorykey);
+        if (!catid) {
+          console.log('unable to find cat key', processdata);
+          continue;
+        }
+
+        const processData = {
+          name: processdata[i].name,
+          description: processdata[i].description,
+          pictureurl: processdata[i].pictureurl,
+          processCategoryId: catid
+        };
+        const createProcess = await API.graphql({ query: mutations.createProcess,
                                                 variables: { input: processData }})
-                            .then((response) => loadSteps(processdata[0], response))
+                            .then((response) => loadSteps(processdata[i], response))
                             .catch((error) => handleCreateProcessError(error));
+      }
     }
   }
 
@@ -126,6 +192,14 @@ export default () => {
       <p />
       <h2>Load Data</h2>
       <p />
+      Choose Category table file
+      <p />
+      <input
+        type="file" accept=".csv"
+        onChange={handleCategoryFileChange} />
+      <p />
+      <button onClick={loadCategories}>Load Categories</button>
+      <p />
       Choose Process table file
       <p />
       <input
@@ -140,6 +214,8 @@ export default () => {
       <p />
       {loadenabled ? <button onClick={loadData}>Load Data</button> :
                     <button disabled>Load Data</button>}
+      <p />
+      {loadstatus}
     </div>
   );
 };

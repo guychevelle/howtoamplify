@@ -94,13 +94,7 @@ export default (props) => {
   return (
     <div>
       <p />
-      <h2><center>How To Use AWS Amplify Tutorials</center></h2>
-      <p />
-      <div>
-        {props.userInfo ? props.userInfo.attributes.name + ' content' :
-                          'anonymous content'
-        }
-      </div>
+      <h2><center>AWS Amplify Quick Tutorials</center></h2>
       <p />
       <div>
         {processes ? <HowToProcessCollection 

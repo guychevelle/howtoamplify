@@ -92,7 +92,7 @@ const Navbarmenu = (props) => {
                    <NavLink className='is-active' onClick={toggleClass} to={`/`}> Home </NavLink> 
                  </li>
                  <li className="menu-item " ><NavLink onClick={toggleClass} className='is-active' to={`/about`}> About </NavLink> </li>
-                 { props.userData ?
+                 { props.userData && props.userData.username == 'david' ?
                    <li className="menu-item " ><NavLink onClick={toggleClass} className='is-active' to={`/load`}> Load </NavLink> </li>
                    : ""
                  }

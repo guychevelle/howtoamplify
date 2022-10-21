@@ -1,3 +1,4 @@
+
 type Process @model @auth(rules: [{allow: private}, 
                                   {allow: public, operations: [read],
                                    provider: iam}]) {
@@ -6,6 +7,15 @@ type Process @model @auth(rules: [{allow: private},
   description: String
   pictureurl: String
   steps: [Steps] @hasMany
+  category: Category @hasOne
+}
+
+type Category @model @auth(rules: [{allow: private},
+                                   {allow: public, operations: [read],
+                                    provider: iam}]) {
+  id: ID!
+  name: String!
+  order: Int!
 }
 
 type Steps @model @auth(rules: [{allow: private}, 

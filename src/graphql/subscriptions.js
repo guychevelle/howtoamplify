@@ -27,11 +27,22 @@ export const onCreateProcess = /* GraphQL */ `
         nextToken
         startedAt
       }
+      category {
+        id
+        name
+        order
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      processCategoryId
     }
   }
 `;
@@ -61,11 +72,22 @@ export const onUpdateProcess = /* GraphQL */ `
         nextToken
         startedAt
       }
+      category {
+        id
+        name
+        order
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      processCategoryId
     }
   }
 `;
@@ -95,6 +117,59 @@ export const onDeleteProcess = /* GraphQL */ `
         nextToken
         startedAt
       }
+      category {
+        id
+        name
+        order
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      processCategoryId
+    }
+  }
+`;
+export const onCreateCategory = /* GraphQL */ `
+  subscription OnCreateCategory {
+    onCreateCategory {
+      id
+      name
+      order
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateCategory = /* GraphQL */ `
+  subscription OnUpdateCategory {
+    onUpdateCategory {
+      id
+      name
+      order
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteCategory = /* GraphQL */ `
+  subscription OnDeleteCategory {
+    onDeleteCategory {
+      id
+      name
+      order
       createdAt
       updatedAt
       _version

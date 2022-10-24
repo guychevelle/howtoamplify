@@ -1,16 +1,70 @@
 pk,processkey,stepnum,name,description,pictureurl,steptext
-1,1,1,Install Node.js,You will run your site on your local machine using Node.js. All tools will be installed using NPM (Node Package Manager).,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/nodelogo.png,Reader will need to navigate to a site to download and install Node/NPM media to macOS at https://kinsta.com/blog/how-to-install-node-js/#how-to-install-nodejs-on-macos\n\nuse command 'node --version' to verify installed Node.js version\n\n$ node --version\nv16.14.2\n$ npm --version\n 8.6.0
-2,1,2,Create a React project,Use the create-react-app command to create your first project.,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/software.png,It is advised to create a local directory under which all other local projects can be managed.  Since examples will be AWS Amplify specific, create an 'amplify' directory under your user home directory.\n\n $ mkdir amplify\n $ cd amplify\n $ pwd\n /Users/<*my home dir*>/amplify\n\n Now create your first React project using the below command:\n\n $ npx create-react-app testapp\n\nThe result of the command will be to create a 'testapp' subdirectory with initial Node files.  To confirm the project was craeted successfully, change your directory to the project directory and start the local site.
-3,1,3,Start the base React app,Confirm React and NPM are working correctly on your machine,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/startapp.png,Execute the following commands:\n\n $ cd testapp\n $ npm start\n\nA simple React page is rendered in your browser. You can stop site execution by entering Ctrl-C in the terminal session to stop npm execution.
+1,1,1,Install Node.js,You will run your site on your local machine using Node.js. All tools will be installed using NPM (Node Package Manager).,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/nodelogo.png,Reader will need to navigate to a site to download and install Node/NPM media to macOS at https://kinsta.com/blog/how-to-install-node-js/#how-to-install-nodejs-on-macos
+
+use command 'node --version' to verify installed Node.js version
+
+$ node --version
+v16.14.2
+$ npm --version
+8.6.0
+2,1,2,Create a React project,Use the create-react-app command to create your first project.,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/software.png,It is advised to create a local directory under which all other local projects can be managed.  Since examples will be AWS Amplify specific create an 'amplify' directory under your user home directory.
+
+$ mkdir amplify
+$ cd amplify
+$ pwd
+/Users/<*my home dir*>/amplify
+
+Now create your first React project using the below command:
+
+$ npx create-react-app testapp
+
+The result of the command will be to create a 'testapp' subdirectory with initial Node files.  To confirm the project was craeted successfully, change your directory to the project directory and start the local site.
+3,1,3,Start the base React app,Confirm React and NPM are working correctly on your machine,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/startapp.png,Execute the following commands:
+
+$ cd testapp
+$ npm start
+
+A simple React page is rendered in your browser. You can stop site execution by entering Ctrl-C in the terminal session to stop npm execution.
 4,1,4,Create a GitHub repository,Not only is it best practice to save code in a version repository like GitHub the repository will also be needed by AWS to host your site in the cloud.,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/newrepo.png,Login to your GitHub account and select the '+' in the top right menu bar and select the 'New repository' option from the dropdown menu.
-5,1,5,Create the new repository,You can select to create either a Public or Private repository.,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/createrepo.png,After entering the new repository name, click on the 'Create repository' button.
+5,1,5,Create the new repository,You can select to create either a Public or Private repository.,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/createrepo.png,After entering the new repository name click on the 'Create repository' button.
 6,1,6,Push code to GitHub,Create a main branch and push committed code to the remote GitHub repository. Confirm the code is in the main branch.,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/validaterepo.png,Execute the below commands to add your project to the remote GitHub repository in a branch called 'main'.
-7,2,1,Run amplify configure,Initiate CLI configuration process. A browser session will be started to login to the AWS Console.,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/consolelogin.png,$ amplify configure\nFollow these steps to set up access to your AWS account\n\nSign in to your AWS administrator account:\nhttps://console.aws.amazon.com/\nPress Enter to continue
-8,2,2,Specify user and region name,After login go back to command line and specify the AWS region (use defalt us-east-1) and enter a user name. An IAM account will be created with this name. Click on the 'Next: Permissions' button after being redirected to the console.,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/adduser1.png,Specify the AWS Region\n ? region:  (Use arrow keys)\n❯ us-east-1\nus-east-2\nus-west-1\nus-west-2\neu-north-1\neu-west-1\neu-west-2\n(Move up and down to reveal more choices)\nSpecify the username of the new IAM user:\n? user name:  amplify-cli
+7,2,1,Run amplify configure,Initiate CLI configuration process. A browser session will be started to login to the AWS Console.,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/consolelogin.png,$ amplify configure
+Follow these steps to set up access to your AWS account
+
+Sign in to your AWS administrator account:
+https://console.aws.amazon.com/
+Press Enter to continue
+8,2,2,Specify user and region name,After login go back to command line and specify the AWS region (use defalt us-east-1) and enter a user name. An IAM account will be created with this name. Click on the 'Next: Permissions' button after being redirected to the console.,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/adduser1.png,Specify the AWS Region
+? region:  (Use arrow keys)
+❯ us-east-1
+us-east-2
+us-west-1
+us-west-2
+eu-north-1
+eu-west-1
+eu-west-2
+(Move up and down to reveal more choices)
+Specify the username of the new IAM user:
+? user name:  amplify-cli
 9,2,3,Grant account access,The console will select 'AdministratorAccess-Amplify'. Keep this selection and click on the 'Next: Tags' button.,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/adduser2.png,Click the 'Next: Tags' button.
 10,2,4,Skip adding tags,Tags are optional and have no effect on account usage,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/adduser3.png,Click the 'Next: Review' button.
 11,2,5,Create the account,Click on the 'Create User' button to initiate account creation.,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/adduser4.png,Click the 'Create User' button.
-12,2,6,Enter access keys & profile name,**DON'T CLOSE THE ACCOUNT CREATION SCREEN!** Click the 'Show' link on the console to display secretAccessKey. Leave prompted Profile Name as 'default'. The name will be needed for the 'amplify init' command.,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/adduser5.png,Enter the access key of the newly created user:\n? accessKeyId:  ********************************\n? secretAccessKey:  **********************************\n? Profile Name:  (default)\n\nSuccessfully set up the new user.\n$ 
-13,3,1,Create JSON config file,Example will use Cognito and will require username and person name. Email required to verify user,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/cognito.png,Click on 'View Code Snippet' to see the sample JSON configuration file.\nYou can find JSON payload definition for auth at: https://github.com/aws-amplify/amplify-cli/blob/main/packages/amplify-headless-interface/src/interface/auth/add.ts\n\nThe JSON file will be used as input to the amplify CLI\nSave you version of the file as demoauth.json.
-14,3,2,Run amplify add auth,Process consistency and repeatability is improved using the CLI instead of the AWS Console. To execute command the JSON file must be piped into the amplify command.,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/authdeployed.png,All carriage returns need to be deleted from the JSON input file. This can be accomplished with the 'tr' command. The below will execute the amplify add auth command with the piped input.\n\n$ tr -d '\n' < demoauth.json | amplify add auth --headless\nYou should see Authorization deployed in the Amplify console.
-15,3,3,Add the app code,Test authentication through a simple React app.,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/createaccount.png,Update the base index.js file generated by create-react-app to included needed code to invoke the Amplify Authenticator component. Click on the Create Account tab to create a new account. An email will be automatically sent to the address specified to verify the new account. Once verified the account will be active in the app.\n\nClick on the view code snippet button to see the full index.js code.
+12,2,6,Enter access keys & profile name,**DON'T CLOSE THE ACCOUNT CREATION SCREEN!** Click the 'Show' link on the console to display secretAccessKey. Leave prompted Profile Name as 'default'. The name will be needed for the 'amplify init' command.,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/adduser5.png,Enter the access key of the newly created user:
+? accessKeyId:  ********************************
+? secretAccessKey:  **********************************
+? Profile Name:  (default)
+
+Successfully set up the new user.
+$ 
+13,3,1,Create JSON config file,Example will use Cognito and will require username and person name. Email required to verify user,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/cognito.png,Click on 'View Code Snippet' to see the sample JSON configuration file.
+You can find JSON payload definition for auth at: https://github.com/aws-amplify/amplify-cli/blob/main/packages/amplify-headless-interface/src/interface/auth/add.ts
+
+The JSON file will be used as input to the amplify CLI
+Save you version of the file as demoauth.json.
+14,3,2,Run amplify add auth,Process consistency and repeatability is improved using the CLI instead of the AWS Console. To execute command the JSON file must be piped into the amplify command.,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/authdeployed.png,All carriage returns need to be deleted from the JSON input file. This can be accomplished with the 'tr' command. The below will execute the amplify add auth command with the piped input.
+
+$ tr -d '\n' < demoauth.json | amplify add auth --headless
+You should see Authorization deployed in the Amplify console.
+15,3,3,Add the app code,Test authentication through a simple React app.,https://howtoamplify-bucket154921-prod.s3.amazonaws.com/public/createaccount.png,Update the base index.js file generated by create-react-app to included needed code to invoke the Amplify Authenticator component. Click on the Create Account tab to create a new account. An email will be automatically sent to the address specified to verify the new account. Once verified the account will be active in the app.
+
+Click on the view code snippet button to see the full index.js code.

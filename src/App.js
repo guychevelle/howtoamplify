@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 // routed content
 import Home from './Home';
 import Steps from './Steps';
+import Code from './Code';
 import Load from './Load';
 import Login from './Login';
 import Logout from './Logout';
@@ -41,11 +42,12 @@ function App() {
   const [loggedin, updateLoggedIn] = useState(false);
   const [authactioncount, updateAuthActionCount] = useState(0);
 
-  // we need to track the Process item selected in the Home page
+  // we need to track the Process and Step items selected in the Home page
   // so we can send Process data to the Steps page so that Steps
   // table data can be queried. The update function will be passed
   // to the Home function so it can set the value
   const [selectedprocessitem, updateSelectedProcessItem] = useState(null);
+  const [selectedstepitem, updateSelectedStepItem] = useState(null);
 
   // add authactioncount as the 2nd arg to useEffect() to create
   // a dependency.  whenever authactioncount changes, useEffect()
@@ -134,7 +136,10 @@ function App() {
                                            updateItem={updateSelectedProcessItem} /> } />
             <Route path="/steps" element={<Steps userInfo={user}
                                                  screenWidth={windowSize.innerWidth}
-                                                 processItem={selectedprocessitem} />} />
+                                                 processItem={selectedprocessitem}
+                                                 updateItem={updateSelectedStepItem} />} />
+            <Route path="/code" element={<Code stepItem={selectedstepitem}
+                                               screenWidth={windowSize.innerWidth} />} />
             <Route path="/about" element={<About />} />
             <Route path="/load" element={<Load />} />
             <Route path="/login" element={<Login />} />

@@ -18,6 +18,7 @@ export default (props) => {
   const authmode = props.userInfo ? "AMAZON_COGNITO_USER_POOLS" :
                                     "AWS_IAM";
 
+  const [categories, updateCategories] = useState(null);
   const [processes, updateProcesses] = useState(null);
   const [steps, updateSteps] = useState(null);
 
@@ -27,6 +28,17 @@ export default (props) => {
     // update the selected Process in the calling parent code
     props.updateItem(item);
     navigate("/steps");
+  }
+
+  function setCategories (data) {
+    console.log('set category data', data);
+    const cats = data.listCategories.items.filter(function (a) {
+                                                  return !a._deleted});
+    updateCategories(cats.sort((a, b) => { return a.order - b.order; }));
+  }
+
+  function handleGetCategoriesError (error) {
+    console.log('handleGetCategoriesError', error);
   }
 
   function setProcesses (data) {
@@ -54,6 +66,13 @@ export default (props) => {
       updateSteps(error.data.listSteps.items);
   }
 
+  async function getCategories () {
+    const allCategories = await API.graphql({ query: queries.listCategories,
+                                              authMode: authmode })
+                          .then((response) => setCategories(response.data))
+                          .catch((error) => handleGetCategoriesError(error));
+  }
+
   async function getProcesses () {
     const allProcesses = await API.graphql({ query: queries.listProcesses,
                                              authMode: authmode })
@@ -71,6 +90,36 @@ export default (props) => {
                      .then((response) => setSteps(response.data))
                      .catch((error) => handleGetStepsError(error));
   }
+
+  function buildDisplay () {
+    if (!categories || !processes)
+      return 'Display not yet built';
+
+    console.log('builddisplay', categories);
+
+    return (
+      categories.map(item =>
+        <div>
+          <p />
+          <center>{item.name}</center>
+          <p />
+          <div>
+            <HowToProcessCollection 
+                       items={processes.filter(function (p) {
+                                               return p.processCategoryId == item.id })}
+                       overrides={processCollectionOverrides}
+                       overrideItems={({ item, index }) => ({
+                         onClick: () => ClickedItem(item),
+                         width: '350px'
+                       })} /> 
+          </div>
+        </div>
+      )
+    );
+  }
+
+  if (!categories)
+    getCategories();
 
   if (!processes)
     getProcesses();
@@ -91,11 +140,23 @@ export default (props) => {
        }
       }
 
+  const display = buildDisplay();
+
   return (
     <div>
       <p />
       <h2><center>AWS Amplify Quick Tutorials</center></h2>
       <p />
+      <div>
+        {display}
+      </div>
+      <p />
+    </div>
+  );
+};
+
+/*
+  how it used to work without Categories
       <div>
         {processes ? <HowToProcessCollection 
                        items={processes}
@@ -107,11 +168,8 @@ export default (props) => {
                      'No processes defined'}
         <p />
       </div>
-    </div>
-  );
-};
 
-/*
+
   process and steps displayed as html lists
         <p />
         Processes:

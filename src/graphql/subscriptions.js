@@ -195,7 +195,6 @@ export const onCreateSteps = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        owner
       }
       createdAt
       updatedAt
@@ -224,7 +223,6 @@ export const onUpdateSteps = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        owner
       }
       createdAt
       updatedAt
@@ -253,7 +251,6 @@ export const onDeleteSteps = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        owner
       }
       createdAt
       updatedAt
@@ -266,8 +263,8 @@ export const onDeleteSteps = /* GraphQL */ `
   }
 `;
 export const onCreateCode = /* GraphQL */ `
-  subscription OnCreateCode($owner: String) {
-    onCreateCode(owner: $owner) {
+  subscription OnCreateCode {
+    onCreateCode {
       id
       codetextkey
       createdAt
@@ -275,13 +272,12 @@ export const onCreateCode = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
 export const onUpdateCode = /* GraphQL */ `
-  subscription OnUpdateCode($owner: String) {
-    onUpdateCode(owner: $owner) {
+  subscription OnUpdateCode {
+    onUpdateCode {
       id
       codetextkey
       createdAt
@@ -289,13 +285,12 @@ export const onUpdateCode = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
 export const onDeleteCode = /* GraphQL */ `
-  subscription OnDeleteCode($owner: String) {
-    onDeleteCode(owner: $owner) {
+  subscription OnDeleteCode {
+    onDeleteCode {
       id
       codetextkey
       createdAt
@@ -303,7 +298,6 @@ export const onDeleteCode = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;

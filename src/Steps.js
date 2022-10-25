@@ -2,12 +2,19 @@ import React from 'react';
 import { useState } from 'react';
 import { API } from 'aws-amplify';
 import { Text } from '@aws-amplify/ui-react';
+import { useNavigate } from 'react-router-dom';
 import { HowToStepsCollection } from './ui-components';
 import * as queries from './graphql/queries';
 
 export default (props) => {
 
   console.log('steps for', props.processItem);
+
+  let navigate = useNavigate();
+  if (!props.processItem) {
+    navigate("/");
+    return;
+  }
 
   const [steps, updateSteps] = useState(null);
 
@@ -35,8 +42,8 @@ export default (props) => {
                          .catch((error) => handleGetProcessStepsError(error));
   }
 
-  function clickedStep (item) {
-    console.log('clicked step', item);
+  function clickedSnippet (item) {
+    console.log('clicked view snippet button', item);
   }
 
   if (!steps)
@@ -68,7 +75,6 @@ export default (props) => {
                      items={steps}
                      overrides={stepCollectionOverrides}
                      overrideItems={({ item, index }) => ({
-                       onClick: () => clickedStep(item),
                        width: '350px',
                        overrides: { TextAreaField: {
                                       rows: '10',
@@ -79,7 +85,19 @@ export default (props) => {
                                           Step Actions
                                         </Text>
                                       )
-                                    }
+                                    },
+                                     CodeButton: {
+                                       onClick: () => clickedSnippet(item),
+                                       children: (
+                                         <Text
+                                           fontSize={12}
+                                           fontWeight="bold"
+                                           fontFamily="inter">
+                                           {item.code ? 'View Code Snippet' :
+                                                        ''}
+                                         </Text>
+                                       )
+                                     }
                                   }
                    })} /> :
                    'Process not selected'}

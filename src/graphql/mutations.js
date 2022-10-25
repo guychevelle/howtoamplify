@@ -216,7 +216,6 @@ export const createSteps = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        owner
       }
       createdAt
       updatedAt
@@ -248,7 +247,6 @@ export const updateSteps = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        owner
       }
       createdAt
       updatedAt
@@ -280,7 +278,6 @@ export const deleteSteps = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        owner
       }
       createdAt
       updatedAt
@@ -305,7 +302,6 @@ export const createCode = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
@@ -322,7 +318,6 @@ export const updateCode = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
@@ -339,7 +334,6 @@ export const deleteCode = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;

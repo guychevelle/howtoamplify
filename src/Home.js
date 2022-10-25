@@ -100,7 +100,9 @@ export default (props) => {
     return (
       categories.map(item =>
         <div>
-        <p><center>{item.name}</center></p>
+          <p />
+          <center>{item.name}</center>
+          <p />
           <div>
             <HowToProcessCollection 
                        items={processes.filter(function (p) {

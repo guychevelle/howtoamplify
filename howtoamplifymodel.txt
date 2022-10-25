@@ -30,7 +30,7 @@ type Steps @model @auth(rules: [{allow: private},
   code: Code @hasOne
 }
 
-type Code @model @auth(rules: [{allow: owner}, 
+type Code @model @auth(rules: [{allow: private}, 
                                {allow: public, operations: [read],
                                 provider: iam}]) {
   id: ID!

@@ -209,7 +209,6 @@ export const getSteps = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        owner
       }
       createdAt
       updatedAt
@@ -243,7 +242,6 @@ export const listSteps = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          owner
         }
         createdAt
         updatedAt
@@ -286,7 +284,6 @@ export const syncSteps = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          owner
         }
         createdAt
         updatedAt
@@ -311,7 +308,6 @@ export const getCode = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
@@ -330,7 +326,6 @@ export const listCodes = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        owner
       }
       nextToken
       startedAt
@@ -358,7 +353,6 @@ export const syncCodes = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        owner
       }
       nextToken
       startedAt

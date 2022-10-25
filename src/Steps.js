@@ -44,6 +44,8 @@ export default (props) => {
 
   function clickedSnippet (item) {
     console.log('clicked view snippet button', item);
+    props.updateItem(item);
+    navigate("/code"); 
   }
 
   if (!steps)

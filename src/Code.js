@@ -37,7 +37,7 @@ export default (props) => {
     getCode();
 
   return (
-    <div>
+    <div className="codediv">
       <p />
       <h2><center>Code for the '{props.stepItem.name}' step</center></h2>
       <p />

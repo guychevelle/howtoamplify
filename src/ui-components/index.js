@@ -21,6 +21,7 @@ export { default as MyIcon } from "./MyIcon";
 export { default as Ampligram } from "./Ampligram";
 export { default as FeaturesText2x2 } from "./FeaturesText2x2";
 export { default as EditProfile } from "./EditProfile";
+export { default as CodeBlock } from "./CodeBlock";
 export { default as HeroLayout3 } from "./HeroLayout3";
 export { default as ProfileCard } from "./ProfileCard";
 export { default as MyCard } from "./MyCard";

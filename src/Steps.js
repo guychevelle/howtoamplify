@@ -73,6 +73,7 @@ export default (props) => {
       <p />
       Description: {props.processItem.description}
       <p />
+      <div className="collectiondiv">
       {steps ? <HowToStepsCollection
                      items={steps}
                      overrides={stepCollectionOverrides}
@@ -103,6 +104,7 @@ export default (props) => {
                                   }
                    })} /> :
                    'Process not selected'}
+      </div>
     </div>
   );
 };

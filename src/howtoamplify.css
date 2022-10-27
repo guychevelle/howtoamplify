@@ -32,6 +32,7 @@ footer {
 /* display profile view/edit card in center
 .codediv {
   display: flex;
+  position: relative;
   height: 200px;
   width: 300px;
 }

@@ -10,7 +10,6 @@ export default (props) => {
   console.log('code and step', props.stepItem);
 
   const [s3code, updateS3Code] = useState(null);
-  const [codearray, updateCodeArray] = useState(null);
 
   let navigate = useNavigate();
   if (!props.stepItem) {
@@ -20,9 +19,7 @@ export default (props) => {
 
   useEffect(() => {
     console.log('Code running useEffect');    
-    //console.log('length of code array', codearray.length);
-    console.log('code array', codearray);
-  }, [codearray]);
+  }, [s3code]);
 
 
   async function getCode() {
@@ -34,20 +31,25 @@ export default (props) => {
     result.Body.text().then(data => {
       console.log('file content', data);
       updateS3Code(data);
-      updateCodeArray(data.split('\n'));
     });
   }
 
   if (!s3code)
     getCode();
 
+  const divstyles = props.screenWidth < 700 ?
+          {width: "370px", height: "400px", fontSize: "10px",
+           alignItems: "center", justifyContent: "center",
+           margin: "auto"} :
+          {width: "80%", alignItems: "center", justifyContent: "center",
+           margin: "auto"}
 
   return (
     <div>
       <p />
-      <h2><center>Code for the '{props.stepItem.name}' step</center></h2>
+      <h3><center>Code for the '{props.stepItem.name}' step</center></h3>
       <p />
-      <div className="codediv">
+      <div style={divstyles}>
         <SyntaxHighlighter
           language="javascript"
           wrapLines={true}
@@ -56,34 +58,6 @@ export default (props) => {
           {s3code}
         </SyntaxHighlighter>
       </div>
-      post map
     </div>
   );
 };
-/*
-      <CodeBlock overrides={codeblockoverrides} />
-      <p />
-         {processes ? processes.map((process, index) => (
-                                    <li key={process.id}>{process.name}</li>
-                                    )) :
-                       ""}
-
-        <CopyBlock
-          text={s3code}
-          language={'javascript'}
-          wrapLines
-          codeBlock={false}
-          theme={github}
-        />
-      <div className="codediv">
-        <CopyBlock
-          text={bashcode}
-          language={'bash'}
-          showLineNumbers={true}
-          wrapLines
-          codeBlock={false}
-          theme={github}
-          style={blockstyles}
-        />
-
-*/

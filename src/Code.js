@@ -38,7 +38,7 @@ export default (props) => {
     getCode();
 
   const divstyles = props.screenWidth < 700 ?
-          {width: "370px", height: "400px", fontSize: "10px",
+          {width: "350px", height: "400px", fontSize: "10px",
            alignItems: "center", justifyContent: "center",
            margin: "auto"} :
           {width: "80%", alignItems: "center", justifyContent: "center",

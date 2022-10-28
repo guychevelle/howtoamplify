@@ -129,7 +129,7 @@ function App() {
         </div>
         <header>
         </header>
-        <div className="collectiondiv"  margin="25px">
+        <div>
           <Routes>
             <Route path="/" element={<Home userInfo={user} 
                                            screenWidth={windowSize.innerWidth}

@@ -14,6 +14,10 @@ export default function GalleryNavMobile(props) {
     <View
       width="400px"
       height="45px"
+      display="block"
+      gap="unset"
+      alignItems="unset"
+      justifyContent="unset"
       position="relative"
       padding="0px 0px 0px 0px"
       backgroundColor="rgba(240,255,240,1)"
@@ -23,19 +27,29 @@ export default function GalleryNavMobile(props) {
       <Image
         width="126px"
         height="45px"
+        display="block"
+        gap="unset"
+        alignItems="unset"
+        justifyContent="unset"
         position="absolute"
         top="0px"
         left="10px"
         padding="0px 0px 0px 0px"
+        objectFit="cover"
         {...getOverrideProps(overrides, "GalleryLogoSmall")}
       ></Image>
       <Image
         width="42px"
         height="37px"
+        display="block"
+        gap="unset"
+        alignItems="unset"
+        justifyContent="unset"
         position="absolute"
         top="4px"
         left="308px"
         padding="0px 0px 0px 0px"
+        objectFit="cover"
         {...getOverrideProps(overrides, "MenuHamburger")}
       ></Image>
     </View>

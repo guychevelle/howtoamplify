@@ -103,7 +103,7 @@ export default (props) => {
           <p />
           <center>{item.name}</center>
           <p />
-          <div>
+          <div className="collectiondiv" margin="25px">
             <HowToProcessCollection 
                        items={processes.filter(function (p) {
                                                return p.processCategoryId == item.id })}

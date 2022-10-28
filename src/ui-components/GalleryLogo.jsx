@@ -14,6 +14,10 @@ export default function GalleryLogo(props) {
     <View
       width="350px"
       height="100px"
+      display="block"
+      gap="unset"
+      alignItems="unset"
+      justifyContent="unset"
       overflow="hidden"
       position="relative"
       padding="0px 0px 0px 0px"
@@ -23,10 +27,15 @@ export default function GalleryLogo(props) {
       <Image
         width="350px"
         height="100px"
+        display="block"
+        gap="unset"
+        alignItems="unset"
+        justifyContent="unset"
         position="absolute"
         top="0px"
         left="0px"
         padding="0px 0px 0px 0px"
+        objectFit="cover"
         {...getOverrideProps(overrides, "GalleryLogo 1")}
       ></Image>
     </View>

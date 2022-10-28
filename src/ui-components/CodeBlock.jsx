@@ -7,13 +7,13 @@
 /* eslint-disable */
 import React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Image, View } from "@aws-amplify/ui-react";
-export default function GalleryLogoMobile(props) {
+import { TextAreaField, View } from "@aws-amplify/ui-react";
+export default function CodeBlock(props) {
   const { overrides, ...rest } = props;
   return (
     <View
-      width="175px"
-      height="50px"
+      width="350px"
+      height="400px"
       display="block"
       gap="unset"
       alignItems="unset"
@@ -21,23 +21,28 @@ export default function GalleryLogoMobile(props) {
       overflow="hidden"
       position="relative"
       padding="0px 0px 0px 0px"
+      backgroundColor="rgba(255,255,255,1)"
       {...rest}
-      {...getOverrideProps(overrides, "GalleryLogoMobile")}
+      {...getOverrideProps(overrides, "CodeBlock")}
     >
-      <Image
-        width="175px"
-        height="50px"
-        display="block"
-        gap="unset"
-        alignItems="unset"
-        justifyContent="unset"
+      <TextAreaField
+        display="flex"
+        gap="8px"
+        direction="column"
+        width="306px"
+        height="352px"
+        alignItems="flex-start"
         position="absolute"
-        top="0px"
-        left="2px"
+        top="22px"
+        left="25px"
         padding="0px 0px 0px 0px"
-        objectFit="cover"
-        {...getOverrideProps(overrides, "GalleryLogoMobile 1")}
-      ></Image>
+        placeholder="Placeholder"
+        size="small"
+        isDisabled={false}
+        labelHidden={true}
+        variation="quiet"
+        {...getOverrideProps(overrides, "TextAreaField")}
+      ></TextAreaField>
     </View>
   );
 }

@@ -93,7 +93,7 @@ export default (props) => {
 
   function buildDisplay () {
     if (!categories || !processes)
-      return 'Display not yet built';
+      return <div><center>Retrieving process content</center></div>;
 
     console.log('builddisplay', categories);
 

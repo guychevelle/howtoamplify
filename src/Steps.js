@@ -69,9 +69,9 @@ export default (props) => {
       <p />
       <h2><center>Steps</center></h2>
       <p />
-      Process: {props.processItem.name}
+      <center><b>Process:</b> {props.processItem.name}</center>
       <p />
-      Description: {props.processItem.description}
+      <div className="centereddiv"><b>Description:</b> {props.processItem.description}</div>
       <p />
       <div className="collectiondiv">
       {steps ? <HowToStepsCollection
